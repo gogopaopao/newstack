@@ -1,4 +1,4 @@
-baseurl: https://gogopaopao.github.io/
+baseurl: https://gogopaopao/newstack.github.io
 languageCode: zh-cn
 theme: hugo-theme-stack
 paginate: 3
