@@ -1,7 +1,9 @@
-baseurl: https://gogopaopao/newstack.github.io
+#对应GitHub生成的网站
+baseurl: https://gogopaopao.github.io/newstack
 languageCode: zh-cn
 theme: hugo-theme-stack
-paginate: 3
+#分页，一页多少篇文章
+paginate: 5
 title: Example Site
 copyright: Example Person
 
