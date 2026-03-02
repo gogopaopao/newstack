@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>文献阅读 on 主页</title>
+        <link>https://gogopaopao.github.io/newstack/categories/%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB/</link>
+        <description>Recent content in 文献阅读 on 主页</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>gogopaopao</copyright>
+        <lastBuildDate>Thu, 15 Jan 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://gogopaopao.github.io/newstack/categories/%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>如何阅读深度学习相关文献</title>
+        <link>https://gogopaopao.github.io/newstack/p/%E5%A6%82%E4%BD%95%E9%98%85%E8%AF%BB%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%9B%B8%E5%85%B3%E6%96%87%E7%8C%AE/</link>
+        <pubDate>Thu, 15 Jan 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://gogopaopao.github.io/newstack/p/%E5%A6%82%E4%BD%95%E9%98%85%E8%AF%BB%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%9B%B8%E5%85%B3%E6%96%87%E7%8C%AE/</guid>
+        <description>&lt;h3 id=&#34;绝大多数论文都是以下的八股结构&#34;&gt;绝大多数论文都是以下的八股结构
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;title 标题 作者&lt;/li&gt;
+&lt;li&gt;abstract 摘要&lt;/li&gt;
+&lt;li&gt;intro  导言&lt;/li&gt;
+&lt;li&gt;method  相关工作，重要部分：你提出的算法&lt;/li&gt;
+&lt;li&gt;exp  实验证明可行性&lt;/li&gt;
+&lt;li&gt;conclusion 结论s&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;花三遍读完一篇论文&#34;&gt;花三遍读完一篇论文
+&lt;/h3&gt;&lt;h4 id=&#34;pass1-海选知道这篇论文在讲什么-通常十几分钟-决定要不要再读下去&#34;&gt;pass1 海选：知道这篇论文在讲什么 通常十几分钟 决定要不要再读下去
+&lt;/h4&gt;&lt;p&gt;​	读标题（是不是跟我相关的）&lt;/p&gt;
+&lt;p&gt;​	摘要（在讲什么）&lt;/p&gt;
+&lt;p&gt;​	直接跳到结论（通常和摘要一样，用实际的结论和数字给你证明一下）&lt;/p&gt;
+&lt;p&gt;实验部分关键的图表，方法里面的图表，看他在干什么，方法怎么样，质量怎么样，是不是适合自己&lt;/p&gt;
+&lt;h4 id=&#34;pass2-精选对各部分有大概理解重要的没有读过的引用的重要文献圈出来&#34;&gt;pass2 精选：对各部分有大概理解，重要的没有读过的引用的重要文献圈出来
+&lt;/h4&gt;&lt;p&gt;​	整个文章过一遍，知道每块在干什么，不要注意很细节的部分（公式，证明），图表搞清楚，每个字&lt;/p&gt;
+&lt;p&gt;​	方法：流程图&lt;/p&gt;
+&lt;p&gt;​	算法：实验：每个x,y轴在干什么，每个点什么意思，作者提出的方法和别人的方法怎么对比的，差距有多大&lt;/p&gt;
+&lt;p&gt;​	不会的留到最后&lt;/p&gt;
+&lt;p&gt;​	读不懂去读之前引用的文章，再回读&lt;/p&gt;
+&lt;h4 id=&#34;pass3-重点研读-知道每一段每一句话在干什么换我来我应该怎么做能不能比他做更好&#34;&gt;pass3 重点研读 ：知道每一段每一句话在干什么，换我来我应该怎么做，能不能比他做更好
+&lt;/h4&gt;&lt;p&gt;​	假设我在写这篇文章：提出了什么问题，想写什么问题，如果我来做应该怎么办，可以用什么来实现这个问题，我实验应该怎么做&lt;/p&gt;
+&lt;p&gt;​	好像是自己做过一遍一样&lt;/p&gt;
+&lt;p&gt;​	最后，关上文章回忆细节部分&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

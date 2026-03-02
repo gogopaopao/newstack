@@ -1,25 +1,48 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  
-  <sitemap>
-    <loc>https://gogopaopao.github.io/newstack/en/sitemap.xml</loc>
-    
-      <lastmod>2020-10-09T00:00:00+00:00</lastmod>
-    
-  </sitemap>
-  
-  <sitemap>
-    <loc>https://gogopaopao.github.io/newstack/zh-cn/sitemap.xml</loc>
-    
-      <lastmod>2020-09-09T00:00:00+00:00</lastmod>
-    
-  </sitemap>
-  
-  <sitemap>
-    <loc>https://gogopaopao.github.io/newstack/ar/sitemap.xml</loc>
-    
-      <lastmod>2019-03-09T00:00:00+00:00</lastmod>
-    
-  </sitemap>
-  
-</sitemapindex>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://gogopaopao.github.io/newstack/</loc>
+    <lastmod>2026-03-03T00:41:24+08:00</lastmod>
+  </url><url>
+    <loc>https://gogopaopao.github.io/newstack/p/hugo%E5%8D%9A%E5%AE%A2%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/</loc>
+    <lastmod>2026-03-03T00:41:24+08:00</lastmod>
+  </url><url>
+    <loc>https://gogopaopao.github.io/newstack/post/</loc>
+    <lastmod>2026-03-03T00:41:24+08:00</lastmod>
+  </url><url>
+    <loc>https://gogopaopao.github.io/newstack/categories/</loc>
+    <lastmod>2026-01-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://gogopaopao.github.io/newstack/p/%E5%A6%82%E4%BD%95%E9%98%85%E8%AF%BB%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%9B%B8%E5%85%B3%E6%96%87%E7%8C%AE/</loc>
+    <lastmod>2026-01-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://gogopaopao.github.io/newstack/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/</loc>
+    <lastmod>2026-01-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://gogopaopao.github.io/newstack/categories/%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB/</loc>
+    <lastmod>2026-01-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://gogopaopao.github.io/newstack/archives/</loc>
+    <lastmod>2019-05-28T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://gogopaopao.github.io/newstack/page/</loc>
+    <lastmod>2019-05-28T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://gogopaopao.github.io/newstack/p/new-support/</loc>
+    <lastmod>2009-03-05T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://gogopaopao.github.io/newstack/categories/%E5%81%9A%E7%9D%80%E7%8E%A9/</loc>
+    <lastmod>2009-03-05T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://gogopaopao.github.io/newstack/links/</loc>
+  </url><url>
+    <loc>https://gogopaopao.github.io/newstack/search/</loc>
+  </url><url>
+    <loc>https://gogopaopao.github.io/newstack/tags/</loc>
+  </url><url>
+    <loc>https://gogopaopao.github.io/newstack/categories/test/</loc>
+  </url><url>
+    <loc>https://gogopaopao.github.io/newstack/%E5%85%B3%E4%BA%8E/</loc>
+  </url>
+</urlset>
