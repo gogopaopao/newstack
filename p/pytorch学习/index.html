@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="1. Dataset类学习：告诉程序数据集在什么地方和索引(牌库) 1.1 python 中的继承： 1 class PHMDataset_Sequential(Dataset): 1.1.1继承方式与c++的继承不一样 C++：区分继承权限">
+<title>Pytorch学习</title>
+
+<link rel='canonical' href='https://gogopaopao.github.io/newstack/p/pytorch%E5%AD%A6%E4%B9%A0/'>
+
+<link rel="stylesheet" href="/newstack/scss/style.min.0304c6baf04e01a8fe70693791cb744d56a3578a3120a8796cefc66825aa39c7.css"><meta property='og:title' content="Pytorch学习">
+<meta property='og:description' content="1. Dataset类学习：告诉程序数据集在什么地方和索引(牌库) 1.1 python 中的继承： 1 class PHMDataset_Sequential(Dataset): 1.1.1继承方式与c++的继承不一样 C++：区分继承权限">
+<meta property='og:url' content='https://gogopaopao.github.io/newstack/p/pytorch%E5%AD%A6%E4%B9%A0/'>
+<meta property='og:site_name' content='从容的老师傅の博客'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-04-03T23:26:51&#43;08:00'/><meta property='article:modified_time' content='2026-04-03T23:26:51&#43;08:00'/>
+<meta name="twitter:title" content="Pytorch学习">
+<meta name="twitter:description" content="1. Dataset类学习：告诉程序数据集在什么地方和索引(牌库) 1.1 python 中的继承： 1 class PHMDataset_Sequential(Dataset): 1.1.1继承方式与c++的继承不一样 C++：区分继承权限">
+    <link rel="shortcut icon" href="/newstack/favicon.ico" />
+
+  
+
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/newstack/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/newstack/img/%E5%A4%B4%E5%83%8F_hu4003009087913957199.jpeg" width="300"
+                            height="303" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">💻</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/newstack">从容的老师傅の博客</a></h1>
+            <h2 class="site-description">欢迎来到我的网站，主要记录个人生活和学习笔记</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/gogopaopao'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/newstack/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/newstack/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/newstack/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/newstack/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/newstack/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-dataset类学习告诉程序数据集在什么地方和索引牌库">1. Dataset类学习：告诉程序数据集在什么地方和索引(牌库)</a>
+      <ul>
+        <li><a href="#11-python-中的继承">1.1 python 中的继承：</a>
+          <ul>
+            <li><a href="#111继承方式与c的继承不一样">1.1.1继承方式与c++的继承不一样</a></li>
+            <li><a href="#112-方法重写与多态虚函数">1.1.2 方法重写与多态（虚函数）</a></li>
+            <li><a href="#113双下划线函数的意义">1.1.3双下划线函数的意义</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#2-dataloader类学习取数据取多少怎么取-加载数据手是神经网络抽牌">2. DataLoader类学习：取数据(取多少怎么取) 加载数据(手是神经网络，抽牌)</a></li>
+    <li><a href="#3-网络搭建nnmodule学习所有神经网络模块的基础类">3. 网络搭建：nn.Module学习(所有神经网络模块的基础类)</a></li>
+  </ul>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/newstack/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" >
+                深度学习
+            </a>
+        
+            <a href="/newstack/categories/pytorch/" >
+                Pytorch
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/newstack/p/pytorch%E5%AD%A6%E4%B9%A0/">Pytorch学习</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Apr 03, 2026</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 3 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="1-dataset类学习告诉程序数据集在什么地方和索引牌库">1. Dataset类学习：告诉程序数据集在什么地方和索引(牌库)
+</h2><h3 id="11-python-中的继承">1.1 python 中的继承：
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">PHMDataset_Sequential</span><span class="p">(</span><span class="n">Dataset</span><span class="p">):</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="111继承方式与c的继承不一样">1.1.1继承方式与c++的继承不一样
+</h4><ul>
+<li><strong>C++：区分继承权限。</strong> C++ 在继承时必须指定权限（<code>public</code>、<code>protected</code>、<code>private</code>），这决定了父类成员在子类中的可见性。</li>
+<li><strong>Python：默认全盘接收。</strong> Python 没有继承权限的概念，默认就是“公开继承”，子类直接继承父类的所有属性和方法。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// C++: 明确指定 public 继承
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">class</span> <span class="nc">Base</span> <span class="p">{</span> <span class="p">...</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Derived</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Base</span> <span class="p">{</span> <span class="p">...</span> <span class="p">};</span> 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># Python: 括号一括，直接继承</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Base</span><span class="p">:</span> <span class="k">pass</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Derived</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span> <span class="k">pass</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="112-方法重写与多态虚函数">1.1.2 方法重写与多态（虚函数）
+</h4><ul>
+<li><strong>C++：默认静态绑定，需要显式声明 <code>virtual</code>。</strong></li>
+<li><strong>Python：天生多态，所有方法都是“虚函数”。</strong> Python 是动态类型语言（鸭子类型），只要子类定义了和父类同名的方法，就会自动覆盖（重写）父类的方法。所有的调用都是在运行时决定的（晚绑定）。</li>
+</ul>
+<h4 id="113双下划线函数的意义">1.1.3双下划线函数的意义
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">PHMDataset_Sequential</span><span class="p">(</span><span class="n">Dataset</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    功能：构建针对 PHM IEEE 2012 数据集的时序数据集 (PyTorch Dataset)。
+</span></span></span><span class="line"><span class="cl"><span class="s2">          它会将数据打包成具有一定时间步长 (sequence length) 的序列，用于 LSTM 的输入。
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset_id</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">indices</span><span class="o">=</span><span class="p">[],</span> <span class="n">seq_len</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">        参数：
+</span></span></span><span class="line"><span class="cl"><span class="s2">            dataset_id (int): 对应全局 DATA 列表中的数据集索引。
+</span></span></span><span class="line"><span class="cl"><span class="s2">            indices (list): 需要包含在当前数据集中的样本索引列表（用于划分训练/验证集）。
+</span></span></span><span class="line"><span class="cl"><span class="s2">            seq_len (int): 序列长度。即模型一次性读取连续的 seq_len 个样本作为输入 (x)，
+</span></span></span><span class="line"><span class="cl"><span class="s2">                           并以该序列最后一个时间步的失效概率作为标签 (y)。
+</span></span></span><span class="line"><span class="cl"><span class="s2">        &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">dataset_id</span> <span class="o">=</span> <span class="n">dataset_id</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">indices</span> <span class="o">=</span> <span class="n">indices</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">seq_len</span> <span class="o">=</span> <span class="n">seq_len</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># 返回当前数据集包含的序列总数</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">indices</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># 根据索引 i 获取具体的序列数据和对应的标签</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sample_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">indices</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sample</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">DATA</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">dataset_id</span><span class="p">][</span><span class="s1">&#39;x&#39;</span><span class="p">][</span><span class="n">sample_id</span><span class="p">:</span><span class="n">sample_id</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">seq_len</span><span class="p">]),</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">DATA</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">dataset_id</span><span class="p">][</span><span class="s1">&#39;y&#39;</span><span class="p">][</span><span class="n">sample_id</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">seq_len</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">sample</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># 假设已经准备好了 indices 列表</span>
+</span></span><span class="line"><span class="cl"><span class="n">train_dataset</span> <span class="o">=</span> <span class="n">PHMDataset_Sequential</span><span class="p">(</span><span class="n">dataset_id</span><span class="o">=</span><span class="n">dataset_id</span><span class="p">,</span> <span class="n">indices</span><span class="o">=</span><span class="n">train_indices</span><span class="p">,</span> <span class="n">seq_len</span><span class="o">=</span><span class="n">SEQ_LEN</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="table-wrapper"><table>
+<thead>
+<tr>
+<th><strong>方法</strong></th>
+<th><strong>官方名称</strong></th>
+<th style="text-align:left"><strong>触发时机</strong></th>
+<th><strong>C++ 对应概念</strong></th>
+<th><strong>笔记</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>__init__</code></td>
+<td>构造函数</td>
+<td style="text-align:left"><strong>实例化对象时</strong>自动执行一次</td>
+<td><code>PHMDataset_Sequential()</code> 构造函数，填入参数<code>dataset_id</code>等</td>
+<td>用于接收原始数据、索引映射、参数配置等。</td>
+</tr>
+<tr>
+<td><code>__len__</code></td>
+<td>长度方法</td>
+<td style="text-align:left">调用 <code>len(obj)</code> 时触发</td>
+<td><code>length(train_dataset)</code></td>
+<td>返回当前数据集可用的<strong>总样本数</strong>。</td>
+</tr>
+<tr>
+<td><code>__getitem__</code></td>
+<td>索引获取</td>
+<td style="text-align:left">使用 <strong><code>obj[i]</code></strong> 取值时触发</td>
+<td><code>train_dataset[]</code> 运算==符重载==</td>
+<td><strong>最核心</strong>。负责根据索引 <code>i</code> 从原始数据中切片、转换 Tensor 并返回单条数据。</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="2-dataloader类学习取数据取多少怎么取-加载数据手是神经网络抽牌">2. DataLoader类学习：取数据(取多少怎么取) 加载数据(手是神经网络，抽牌)
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># 封装为 DataLoader</span>
+</span></span><span class="line"><span class="cl"><span class="n">train_dataloaders</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">train_dataset</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">train_batch_size</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">num_workers</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">val_dataloaders</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">val_dataset</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">val_batch_size</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">num_workers</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>**Parameters: **只需设置少量参数，大部分都是用的默认值</p>
+<ul>
+<li>
+<p><strong>dataset</strong> (<a class="link" href="https://docs.pytorch.org/docs/stable/data.html#torch.utils.data.Dataset"  target="_blank" rel="noopener"
+    ><em>Dataset</em></a>) – dataset from which to load the data.</p>
+</li>
+<li>
+<p><strong>batch_size</strong> (<a class="link" href="https://docs.python.org/3/library/functions.html#int"  target="_blank" rel="noopener"
+    ><em>int</em></a><em>,</em> <em>optional</em>) – how many samples per batch to load (default: <code>1</code>).  每次取几个数据集</p>
+</li>
+<li>
+<p><strong>shuffle</strong> (<a class="link" href="https://docs.python.org/3/library/functions.html#bool"  target="_blank" rel="noopener"
+    ><em>bool</em></a><em>,</em> <em>optional</em>) – set to <code>True</code> to have the data <strong>reshuffled(重新洗牌)</strong> at every epoch (default: <code>False</code>).</p>
+</li>
+<li>
+<p><strong>num_workers</strong> (<a class="link" href="https://docs.python.org/3/library/functions.html#int"  target="_blank" rel="noopener"
+    ><em>int</em></a><em>,</em> <em>optional</em>) – how many subprocesses to use for data loading. <code>0</code> means that the data will be loaded in the main process. (default: <code>0</code>)  Windows 中大于1容易出现问题</p>
+</li>
+</ul>
+<h2 id="3-网络搭建nnmodule学习所有神经网络模块的基础类">3. 网络搭建：nn.Module学习(所有神经网络模块的基础类)
+</h2><p>基础搭建：两个函数都要有，init和forward</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Model</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">conv1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">conv2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 前向传递</span>
+</span></span><span class="line"><span class="cl"><span class="n">Define</span> <span class="n">the</span> <span class="n">computation</span> <span class="n">performed</span> <span class="n">at</span> <span class="n">every</span> <span class="n">call</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl"><span class="n">Should</span> <span class="n">be</span> <span class="n">overridden</span> <span class="n">by</span> <span class="nb">all</span> <span class="n">subclasses</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">conv1</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">conv2</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>预测时间 (FPT)</strong>：在机器运行初期计算峰度（kurtosis）的均值和标准差，当连续两次的峰度值满足 $|k_{i-1}-\mu|>2\sigma$ 时，将该时刻判定为退化起点（FPT）</p>
+<p><strong>构建 RUL 标签</strong>：仅对 FPT 之后的数据进行寿命预测，根据公式计算剩余使用寿命百分比作为标签，例如起始点为 100%，寿命终点为 0% 。</p>
+<p><strong>短时傅里叶变换 (STFT)</strong>：对 FPT 之后的信号应用 STFT 转换为时频域信息，窗口选择 20ms 的 Hamming 窗，步长为 10ms 。</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/newstack/p/%E6%BB%9A%E5%8A%A8%E8%BD%B4%E6%89%BF%E6%95%B0%E6%8D%AE%E9%9B%86%E5%AD%A6%E4%B9%A0/">
+        
+        
+            <div class="article-image">
+                <img src="/newstack/p/%E6%BB%9A%E5%8A%A8%E8%BD%B4%E6%89%BF%E6%95%B0%E6%8D%AE%E9%9B%86%E5%AD%A6%E4%B9%A0/img/%E8%AF%84%E5%88%86%E5%87%BD%E6%95%B0%E7%9A%84%E5%9B%BE.a0e6c843855f0136d4c25111353b94e5_hu9181532278757597810.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 滚动轴承数据集学习"
+                        
+                        data-hash="md5-oObIQ4VfATbUwlERNTuU5Q==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">滚动轴承数据集学习</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/newstack/p/%E5%A6%82%E4%BD%95%E9%98%85%E8%AF%BB%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%9B%B8%E5%85%B3%E6%96%87%E7%8C%AE/">
+        
+        
+            <div class="article-image">
+                <img src="/newstack/p/%E5%A6%82%E4%BD%95%E9%98%85%E8%AF%BB%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%9B%B8%E5%85%B3%E6%96%87%E7%8C%AE/1.3da498b3264154d0779053ab4d709454_hu14704500923193509174.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 如何阅读深度学习相关文献"
+                        
+                        data-hash="md5-PaSYsyZBVNB3kFOrTXCUVA==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">如何阅读深度学习相关文献</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2025 - 
+        
+        2026 gogopaopao
+    </section>
+    
+    <section class="powerby">
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.26.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/newstack/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

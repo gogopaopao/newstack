@@ -120,13 +120,49 @@
 &lt;blockquote&gt;
 &lt;p&gt;代表在这个瞬间，轴承在竖直方向上受到了 0.146g 的加速度。&lt;strong&gt;这里的负号（-）仅仅代表“方向”&lt;/strong&gt;。假设传感器规定“向上震动”为正，那么“-0.146”就表示这一瞬间轴承正在向&lt;strong&gt;下&lt;/strong&gt;震动。&lt;/p&gt;
 &lt;/blockquote&gt;
+&lt;h3 id=&#34;怎么判断好坏-通过振动信号&#34;&gt;怎么判断好坏？—— 通过振动信号
+&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://gogopaopao.github.io/newstack/newstack/p/%E6%BB%9A%E5%8A%A8%E8%BD%B4%E6%89%BF%E6%95%B0%E6%8D%AE%E9%9B%86%E5%AD%A6%E4%B9%A0/img/%E6%8C%AF%E5%8A%A8%E4%BF%A1%E5%8F%B7.png&#34;
+	width=&#34;575&#34;
+	height=&#34;464&#34;
+	srcset=&#34;https://gogopaopao.github.io/newstack/newstack/p/%E6%BB%9A%E5%8A%A8%E8%BD%B4%E6%89%BF%E6%95%B0%E6%8D%AE%E9%9B%86%E5%AD%A6%E4%B9%A0/img/%E6%8C%AF%E5%8A%A8%E4%BF%A1%E5%8F%B7_hu8128674831810125752.png 480w, https://gogopaopao.github.io/newstack/newstack/p/%E6%BB%9A%E5%8A%A8%E8%BD%B4%E6%89%BF%E6%95%B0%E6%8D%AE%E9%9B%86%E5%AD%A6%E4%B9%A0/img/%E6%8C%AF%E5%8A%A8%E4%BF%A1%E5%8F%B7_hu3896777374607073321.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;123&#34;
+		data-flex-basis=&#34;297px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;**横轴（X轴）代表时间：**时间是指振动信号采集的时刻或时间序列中的时间点。它表示了信号采集的顺序和时间间隔。横轴上的单位通常是秒（s）或毫秒（ms），取决于信号采集的频率和持续时间。
+&lt;ul&gt;
+&lt;li&gt;上图是记录点，没有单位&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;**纵轴（Y轴）代表振动信号的幅值：**振动信号的幅值表示了在特定时间点或时间段内的振动强度或振幅。它反映了振动信号的能量或振幅大小。在轴承故障数据集中，纵轴（Y轴）代表的是轴承的振动信号的幅值，以加速度（Acceleration）作为单位。纵轴上的数值表示轴承在特定时间点或时间段内的振动加速度值。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;单纯依靠振动幅值只能做到整体的阈值报警无法洞察退化的本质&#34;&gt;单纯依靠‘振动幅值’只能做到整体的阈值报警，无法洞察退化的本质
+&lt;/h4&gt;&lt;p&gt;​	引入‘频率’维度，是因为不同退化阶段，会在特定的频带上呈现出截然不同的能量分布。例如早期微弱故障通常激发高频共振，而晚期失效则表现为全频段的宽带噪声。&lt;/p&gt;
+&lt;p&gt;​	CWT 提供的二维时频图，将幅值转化为颜色能量，将时间与频率在 XY 轴展开。这使得我们的 CNN 模型不再是简单地‘看绝对响度’，而是真正学会了‘听音辨病’，通过捕捉特定频带上能量纹理的演变规律，实现了高鲁棒性、高精度的剩余寿命预测。&lt;/p&gt;
+&lt;p&gt;轴承故障数据的信号特性常随时间变化，对于这种非平稳信号分析，CWT 提供了一种同时在时间和频率上定位信号特征的方法。&lt;/p&gt;
+&lt;p&gt;连续小波变换（Continuous Wavelet Transform，CWT）是一种用于在时域和频域上同时分析信号的方法，它通过使用不同尺度和位置的小波函数对信号进行变换，以获取信号的局部特性。
+&lt;/p&gt;
+$$
+W(a,b) = \frac{1}{\sqrt{|a|}} \int x(t) \psi^* \left(\frac{t-b}{a}\right) dt
+$$
+&lt;p&gt;coef, _ = pywt.cwt(data, np.linspace(1, 128, 128), WAVELET_TYPE)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;data&lt;/code&gt; 代表公式里的 $x(t)$&lt;/strong&gt;：它是你要分析的原始信号（源数据）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;第二个输入&lt;/code&gt; 代表公式里的 $a$（尺度）&lt;/strong&gt;：它是你人为设定的一组数字，决定了你要把小波拉伸或压缩成多少种不同的胖瘦程度（对应不同的频率）。&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h3 id=&#34;准确度定义验证模型好坏&#34;&gt;准确度定义，验证模型好坏
-&lt;/h3&gt;&lt;p&gt;​	团队的得分基于其RUL结果,这些结果已转换为预测的百分比误差。分别记 $\overline{RUL_i}$ 和 $ActRUL_i$ 为参与者估算的轴承剩余使用寿命, $ActRUL_i$ 为实际待预测的(actual) RUL(其中 $i \in [1,11]$ 代表表1中定义的测试轴承)。实验 $i$ 的百分比误差定义为:&lt;/p&gt;
+&lt;/h3&gt;&lt;p&gt;​	团队的得分基于其RUL结果,这些结果已转换为预测的百分比误差。分别记 $\overline{RUL_i}$ 和 $ActRUL_i$ 为参与者估算的轴承剩余使用寿命, $ActRUL_i$ 为实际待预测的(actual) RUL(其中 $i \in [1,11]$ 代表表1中定义的测试轴承)。实验 $i$ 的百分比误差定义为:
+&lt;/p&gt;
 $$
 \% Er_i = 100 \times \frac{ActRUL_i - \widehat{RUL_i}}{ActRUL_i} \tag{1}
 $$
 &lt;p&gt;
-​	\( \ {\% E{r}_{i} &gt; 0} \) ：实际时间大于预估——高估了轴承&lt;/p&gt;
+\( \ {\% E{r}_{i} &gt; 0} \) ：实际时间大于预估——高估了轴承&lt;/p&gt;
 &lt;p&gt;​	\( \ {\% E{r}_{i} &gt; 0} \) ：实际时间小于预估——低估了轴承&lt;/p&gt;
 &lt;p&gt;​	低估和高估的情况&lt;strong&gt;不应该以相同方式考虑&lt;/strong&gt;：早期RUL预测相关的良好估算表现 (即 \( \left. {\% E{r}_{i} &gt; 0}\right) \) ,&lt;strong&gt;考虑提前拆除&lt;/strong&gt;的情况，以及对超出实际组件RUL的RUL估算，应该给予更严重的扣除(即 \(\left. {\% E{r}_{i} &lt; 0}\right)\) 。因此,实验 \(i\) 的RUL估算&lt;strong&gt;准确度&lt;/strong&gt;得分定义如下。函数图展示了该评分函数的演变过程。&lt;/p&gt;
 &lt;p&gt;​	说人话就是：&lt;strong&gt;高估轴承寿命的代价，远比低估的代价要惨痛得多&lt;/strong&gt;&lt;/p&gt;
