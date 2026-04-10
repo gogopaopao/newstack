@@ -62,7 +62,7 @@ params:
 
     sidebar:
         emoji: 💻              # 头像上方的动态表情
-        subtitle: "从容的 老师傅"  # 你的个人签名/简介
+        subtitle: "欢迎来到我的网站，主要记录个人生活和学习笔记"  # 你的个人签名/简介
         avatar:
             enabled: true
             local: true
@@ -217,15 +217,15 @@ menu:
     social:
         - identifier: github
           name: GitHub
-          url: https://github.com/CaiJimmy/hugo-theme-stack
+          url: https://github.com/gogopaopao
           params:
               icon: brand-github
 
-        - identifier: twitter
-          name: Twitter
-          url: https://twitter.com
-          params:
-              icon: brand-twitter
+        # - identifier: twitter
+        #   name: Twitter
+        #   url: https://twitter.com
+        #   params:
+        #       icon: brand-twitter
 
 related:
     includeNewer: true

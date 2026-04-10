@@ -1,7 +1,9 @@
 +++
-title = 'HUGO博客使用教程'
+title = 'HUGO博客维护指令速查'
 date = 2026-03-03T00:41:24+08:00
 categories = ["速查","博客搭建"]
+weight = 1
+
 +++
 
 调试命令：hugo server -D
@@ -151,3 +153,75 @@ math = false
 
 - **层级问题**：默认目录从 `##` (H2) 开始抓取。如果你的标题是用 `#` (H1) 写的，它不会出现在目录里。
 - **解决方法**：将正文第一个大标题改为 `##` 开头。
+
+### 四、Git SSH 部署全攻略：从配置到实战
+
+在使用 Git 部署项目（如 Hugo 博客）时，HTTPS 经常会遇到网络超时或反复要求输入密码的问题。切换到 **SSH 方式** 是最稳定且“一劳永逸”的解决方案。
+
+#### 1. 核心流程：SSH 的工作原理
+
+SSH（Secure Shell）通过一对“密钥”来验证身份：
+
+- **私钥 (Private Key)**：放在你本地电脑，绝对不能泄露。
+- **公钥 (Public Key)**：上传到 GitHub。 当你推送代码时，GitHub 会用公钥和你本地的私钥进行匹配，匹配成功即可通行。
+
+------
+
+#### 2. 配置步骤
+
+##### 第一步：生成 SSH 密钥
+
+如果你本地还没有密钥，打开终端输入：
+
+```Bash
+ssh-keygen -t ed25519 -C "你的邮箱@example.com"
+```
+
+- **提示：** 一路按下 **回车** 即可（无需设置密码短语）。
+- **位置：** 密钥默认保存在 `C:\Users\用户名\.ssh\` 下。
+
+##### 第二步：将公钥添加到 GitHub
+
+1. 找到 `.ssh` 文件夹下的 `id_ed25519.pub` 文件，用记事本打开并**全选复制**。
+2. 登录 GitHub -> **Settings** -> **SSH and GPG keys** -> **New SSH key**。
+3. **Title** 随便填（如 `y9000p`），**Key** 粘贴刚才复制的内容。
+
+##### 第三步：修改仓库远程地址
+
+这是最关键的一步。你需要把仓库的连接方式从 HTTPS 改为 SSH：
+
+```Bash
+# 查看当前地址
+git remote -v
+
+# 修改为 SSH 地址（格式为 git@github.com:用户名/仓库名.git）
+git remote set-url origin git@github.com:gogopaopao/gogopaopao.github.io.git
+```
+
+##### 第四步：测试连接
+
+```Bash
+ssh -T git@github.com
+```
+
+看到 `Hi gogopaopao! You've successfully authenticated...` 就说明连接彻底通了。
+
+------
+
+#### 3. 常用上传命令清单
+
+整理好配置后，日常开发只需三步走：
+
+1. **添加改动：** `git add .`
+2. **提交描述：** `git commit -m "update: 部署新博文"`
+3. **推送远程：** `git push -u origin main`
+
+##### 特殊情况处理：
+
+- **强制推送（慎用）：** 如果远程仓库有冲突且你确定以本地为准，可以使用 `git push -u origin main -f`。
+
+- **解决中文文件名乱码：**
+
+  ```Bash
+  git config --global core.quotepath false
+  ```
