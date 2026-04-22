@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>gogopaopao</copyright>
-        <lastBuildDate>Fri, 03 Apr 2026 23:26:51 +0800</lastBuildDate><atom:link href="https://gogopaopao.github.io/newstack/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 22 Apr 2026 10:52:45 +0800</lastBuildDate><atom:link href="https://gogopaopao.github.io/newstack/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>HUGO博客维护指令速查</title>
         <link>https://gogopaopao.github.io/newstack/p/hugo%E5%8D%9A%E5%AE%A2%E7%BB%B4%E6%8A%A4%E6%8C%87%E4%BB%A4%E9%80%9F%E6%9F%A5/</link>
         <pubDate>Tue, 03 Mar 2026 00:41:24 +0800</pubDate>
@@ -293,6 +293,60 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;/li&gt;
 &lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>STM32单片机被锁</title>
+        <link>https://gogopaopao.github.io/newstack/p/stm32%E5%8D%95%E7%89%87%E6%9C%BA%E8%A2%AB%E9%94%81/</link>
+        <pubDate>Wed, 22 Apr 2026 10:52:45 +0800</pubDate>
+        
+        <guid>https://gogopaopao.github.io/newstack/p/stm32%E5%8D%95%E7%89%87%E6%9C%BA%E8%A2%AB%E9%94%81/</guid>
+        <description>&lt;h1 id=&#34;stm32芯片被锁&#34;&gt;STM32芯片被锁
+&lt;/h1&gt;&lt;h6 id=&#34;移植rt-thread卡了很久没成功最后发现是芯片锁住了程序下不进去&#34;&gt;移植rt-thread卡了很久没成功，最后发现是芯片锁住了程序下不进去
+&lt;/h6&gt;&lt;p&gt;我觉得可能是使用pyocd下载程序，第一次用了较低版本下载导致锁住了，换新版下载就一直失败了，知道解锁之后才能下进去程序。&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.bilibili.com/video/BV1WY4y1b79Z/?spm_id_from=333.788.top_right_bar_window_history.content.click&amp;amp;vd_source=e860cbec547aae4a28e2232f90796889&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;STM32芯片被锁住， 10秒解锁Flash_哔哩哔哩_bilibili&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;下载失败应该考虑是不是flash被锁住了&lt;/p&gt;
+&lt;p&gt;用st-link连接， ST-LINK Utility&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://gogopaopao.github.io/newstack/newstack/p/stm32%E5%8D%95%E7%89%87%E6%9C%BA%E8%A2%AB%E9%94%81/img/image-1.png&#34;
+	width=&#34;819&#34;
+	height=&#34;586&#34;
+	srcset=&#34;https://gogopaopao.github.io/newstack/newstack/p/stm32%E5%8D%95%E7%89%87%E6%9C%BA%E8%A2%AB%E9%94%81/img/image-1_hu6860833667186913277.png 480w, https://gogopaopao.github.io/newstack/newstack/p/stm32%E5%8D%95%E7%89%87%E6%9C%BA%E8%A2%AB%E9%94%81/img/image-1_hu2413316966830381744.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;139&#34;
+		data-flex-basis=&#34;335px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;target里面connect，连接好后再点option bytes&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://gogopaopao.github.io/newstack/newstack/p/stm32%E5%8D%95%E7%89%87%E6%9C%BA%E8%A2%AB%E9%94%81/img/image-2.png&#34;
+	width=&#34;823&#34;
+	height=&#34;723&#34;
+	srcset=&#34;https://gogopaopao.github.io/newstack/newstack/p/stm32%E5%8D%95%E7%89%87%E6%9C%BA%E8%A2%AB%E9%94%81/img/image-2_hu18324399269777535488.png 480w, https://gogopaopao.github.io/newstack/newstack/p/stm32%E5%8D%95%E7%89%87%E6%9C%BA%E8%A2%AB%E9%94%81/img/image-2_hu13002054095476594468.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;113&#34;
+		data-flex-basis=&#34;273px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;在这里当时我是Level 1&lt;/p&gt;
+&lt;p&gt;RDP（read out protection）&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;1、Level 0（无保护）&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;默认设置，所有读写和擦除操作都可以正常支持。&lt;/p&gt;
+&lt;p&gt;2、Level 1 （Flash连接保护）&lt;/p&gt;
+&lt;p&gt;（1）可以防止连接调试器时读取Flash内容，或者RAM中存有恶意获取代码，也是禁止的。&lt;/p&gt;
+&lt;p&gt;（2）如果没有检测到从内部RAM启动，从系统bootloader启动且没有连接调试器，对用户Flash的读写和擦除操作都是允许的，并且其它安全存储区也是可以访问的。否则是禁止访问的，一旦检测到对Flash的读请求，将产生总线错误。&lt;/p&gt;
+&lt;p&gt;（3）如果将Level 1切换到Level 0时，用户Flash区和安全区域将被删除。&lt;/p&gt;
+&lt;p&gt;3、Level 2（设备保护和自举保护）&lt;/p&gt;
+&lt;p&gt;（1）所有调试特性被关系。
+（2）禁止从RAM启动。
+（3）除了选项字节里面的SWAP位可以配置，其它位都无法再更改。
+（4）禁止了调试功能，且禁止了从RAM和系统bootloader启动，用户Flash区是可以执行读写和擦除操作的，访问其它安全存储区也是可以的。&lt;/p&gt;
+&lt;p&gt;特别注意：&lt;strong&gt;Level2修改是永久性的，一旦配置为Level2将不再支持被修改。&lt;/strong&gt;&lt;/p&gt;
 </description>
         </item>
         <item>
