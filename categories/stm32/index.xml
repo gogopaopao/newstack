@@ -7,7 +7,141 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>gogopaopao</copyright>
-        <lastBuildDate>Wed, 22 Apr 2026 10:52:45 +0800</lastBuildDate><atom:link href="https://gogopaopao.github.io/newstack/categories/stm32/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 25 Apr 2026 00:36:42 +0800</lastBuildDate><atom:link href="https://gogopaopao.github.io/newstack/categories/stm32/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>STM32启动配置速查——BOOT引脚</title>
+        <link>https://gogopaopao.github.io/newstack/p/stm32%E5%90%AF%E5%8A%A8%E9%85%8D%E7%BD%AE%E9%80%9F%E6%9F%A5boot%E5%BC%95%E8%84%9A/</link>
+        <pubDate>Sat, 25 Apr 2026 00:36:42 +0800</pubDate>
+        
+        <guid>https://gogopaopao.github.io/newstack/p/stm32%E5%90%AF%E5%8A%A8%E9%85%8D%E7%BD%AE%E9%80%9F%E6%9F%A5boot%E5%BC%95%E8%84%9A/</guid>
+        <description>&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;决定了处理器从哪个具体地址去获得第1条需要执行的指令&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;对于处理器来说，无论它挂接的是闪存、内存，还是硬盘，它在启动时是“一无所知”的，我们需要通过硬件设计来告诉它存储第一条指令的外设。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;STM32系列处理器的第一条执行指令地址是通过硬件设计来实现的。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://gogopaopao.github.io/newstack/newstack/p/stm32%E5%90%AF%E5%8A%A8%E9%85%8D%E7%BD%AE%E9%80%9F%E6%9F%A5boot%E5%BC%95%E8%84%9A/img/%E5%90%AF%E5%8A%A8%E9%85%8D%E7%BD%AE.png&#34;
+	width=&#34;1587&#34;
+	height=&#34;307&#34;
+	srcset=&#34;https://gogopaopao.github.io/newstack/newstack/p/stm32%E5%90%AF%E5%8A%A8%E9%85%8D%E7%BD%AE%E9%80%9F%E6%9F%A5boot%E5%BC%95%E8%84%9A/img/%E5%90%AF%E5%8A%A8%E9%85%8D%E7%BD%AE_hu2543139600891646314.png 480w, https://gogopaopao.github.io/newstack/newstack/p/stm32%E5%90%AF%E5%8A%A8%E9%85%8D%E7%BD%AE%E9%80%9F%E6%9F%A5boot%E5%BC%95%E8%84%9A/img/%E5%90%AF%E5%8A%A8%E9%85%8D%E7%BD%AE_hu652691510605661105.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;516&#34;
+		data-flex-basis=&#34;1240px&#34;
+	
+&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>PWM</title>
+        <link>https://gogopaopao.github.io/newstack/p/pwm/</link>
+        <pubDate>Sat, 25 Apr 2026 00:12:53 +0800</pubDate>
+        
+        <guid>https://gogopaopao.github.io/newstack/p/pwm/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>GPIO</title>
+        <link>https://gogopaopao.github.io/newstack/p/gpio/</link>
+        <pubDate>Sat, 25 Apr 2026 00:12:38 +0800</pubDate>
+        
+        <guid>https://gogopaopao.github.io/newstack/p/gpio/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>STM32单片机的最小系统电路</title>
+        <link>https://gogopaopao.github.io/newstack/p/stm32%E5%8D%95%E7%89%87%E6%9C%BA%E7%9A%84%E6%9C%80%E5%B0%8F%E7%B3%BB%E7%BB%9F%E7%94%B5%E8%B7%AF/</link>
+        <pubDate>Sat, 25 Apr 2026 00:00:35 +0800</pubDate>
+        
+        <guid>https://gogopaopao.github.io/newstack/p/stm32%E5%8D%95%E7%89%87%E6%9C%BA%E7%9A%84%E6%9C%80%E5%B0%8F%E7%B3%BB%E7%BB%9F%E7%94%B5%E8%B7%AF/</guid>
+        <description>&lt;h1 id=&#34;要了解最小电路的目的就是知道哪些脚是被系统占用了不能自由调用&#34;&gt;要了解最小电路的目的就是知道&lt;strong&gt;哪些脚是被系统占用了&lt;/strong&gt;，不能自由调用
+&lt;/h1&gt;&lt;p&gt;参考文档：&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/weixin_42109443/article/details/137303466?ops_request_misc=%7B%22request%5Fid%22%3A%22422bc058503681afd8ab2f949b85ba8c%22%2C%22scm%22%3A%2220140713.130102334..%22%7D&amp;amp;request_id=422bc058503681afd8ab2f949b85ba8c&amp;amp;biz_id=0&amp;amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-137303466-null-null.142%5ev100%5epc_search_result_base9&amp;amp;utm_term=stm32%e6%95%99%e7%a8%8b&amp;amp;spm=1018.2226.3001.4187&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;STM32单片机自学教程_stm32教程-CSDN博客&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;芯片型号：STM32F103C8T6&lt;/p&gt;
+&lt;h2 id=&#34;速查总览&#34;&gt;速查总览：
+&lt;/h2&gt;&lt;p&gt;&lt;img src=&#34;https://gogopaopao.github.io/newstack/newstack/p/stm32%E5%8D%95%E7%89%87%E6%9C%BA%E7%9A%84%E6%9C%80%E5%B0%8F%E7%B3%BB%E7%BB%9F%E7%94%B5%E8%B7%AF/img/%E6%9C%80%E5%B0%8F%E7%B3%BB%E7%BB%9F.png&#34;
+	width=&#34;1054&#34;
+	height=&#34;1089&#34;
+	srcset=&#34;https://gogopaopao.github.io/newstack/newstack/p/stm32%E5%8D%95%E7%89%87%E6%9C%BA%E7%9A%84%E6%9C%80%E5%B0%8F%E7%B3%BB%E7%BB%9F%E7%94%B5%E8%B7%AF/img/%E6%9C%80%E5%B0%8F%E7%B3%BB%E7%BB%9F_hu601810510005882372.png 480w, https://gogopaopao.github.io/newstack/newstack/p/stm32%E5%8D%95%E7%89%87%E6%9C%BA%E7%9A%84%E6%9C%80%E5%B0%8F%E7%B3%BB%E7%BB%9F%E7%94%B5%E8%B7%AF/img/%E6%9C%80%E5%B0%8F%E7%B3%BB%E7%BB%9F_hu11729342166841975924.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;96&#34;
+		data-flex-basis=&#34;232px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;1-电源电路&#34;&gt;1. 电源电路
+&lt;/h3&gt;&lt;p&gt;为STM32芯片提供工作电压的电路部分，需要3.3v，见&lt;strong&gt;总览&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;2-复位电路&#34;&gt;2. 复位电路
+&lt;/h3&gt;&lt;p&gt;有三种复位方式，分别是上电复位、手动复位和程序自动复位&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://gogopaopao.github.io/newstack/newstack/p/stm32%E5%8D%95%E7%89%87%E6%9C%BA%E7%9A%84%E6%9C%80%E5%B0%8F%E7%B3%BB%E7%BB%9F%E7%94%B5%E8%B7%AF/img/%E5%A4%8D%E4%BD%8D%E7%94%B5%E8%B7%AF.png&#34;
+	width=&#34;272&#34;
+	height=&#34;414&#34;
+	srcset=&#34;https://gogopaopao.github.io/newstack/newstack/p/stm32%E5%8D%95%E7%89%87%E6%9C%BA%E7%9A%84%E6%9C%80%E5%B0%8F%E7%B3%BB%E7%BB%9F%E7%94%B5%E8%B7%AF/img/%E5%A4%8D%E4%BD%8D%E7%94%B5%E8%B7%AF_hu14212297610093268271.png 480w, https://gogopaopao.github.io/newstack/newstack/p/stm32%E5%8D%95%E7%89%87%E6%9C%BA%E7%9A%84%E6%9C%80%E5%B0%8F%E7%B3%BB%E7%BB%9F%E7%94%B5%E8%B7%AF/img/%E5%A4%8D%E4%BD%8D%E7%94%B5%E8%B7%AF_hu15266350697062092270.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;65&#34;
+		data-flex-basis=&#34;157px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;3-时钟电路&#34;&gt;3. 时钟电路
+&lt;/h3&gt;&lt;p&gt;​	时钟电路为STM32单片机提供时钟信号，这是单片机正常工作的基础。时钟电路通常由晶振和相关的电路组成，为单片机提供稳定的时钟频率。STM32主晶振为8MHZ，经过&lt;strong&gt;倍频&lt;/strong&gt;后为72MHZ。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;关于&lt;strong&gt;倍频&lt;/strong&gt;，见时钟配置详解&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;https://gogopaopao.github.io/newstack/newstack/p/stm32%E5%8D%95%E7%89%87%E6%9C%BA%E7%9A%84%E6%9C%80%E5%B0%8F%E7%B3%BB%E7%BB%9F%E7%94%B5%E8%B7%AF/img/%E6%97%B6%E9%92%9F%E7%94%B5%E8%B7%AF.png&#34;
+	width=&#34;297&#34;
+	height=&#34;415&#34;
+	srcset=&#34;https://gogopaopao.github.io/newstack/newstack/p/stm32%E5%8D%95%E7%89%87%E6%9C%BA%E7%9A%84%E6%9C%80%E5%B0%8F%E7%B3%BB%E7%BB%9F%E7%94%B5%E8%B7%AF/img/%E6%97%B6%E9%92%9F%E7%94%B5%E8%B7%AF_hu8246752747218524862.png 480w, https://gogopaopao.github.io/newstack/newstack/p/stm32%E5%8D%95%E7%89%87%E6%9C%BA%E7%9A%84%E6%9C%80%E5%B0%8F%E7%B3%BB%E7%BB%9F%E7%94%B5%E8%B7%AF/img/%E6%97%B6%E9%92%9F%E7%94%B5%E8%B7%AF_hu18341036250837541701.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;71&#34;
+		data-flex-basis=&#34;171px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;4-调试接口电路&#34;&gt;4. 调试接口电路
+&lt;/h3&gt;&lt;p&gt;​	下载程序和调试单片机的接口电路，用的是SWD&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://gogopaopao.github.io/newstack/newstack/p/stm32%E5%8D%95%E7%89%87%E6%9C%BA%E7%9A%84%E6%9C%80%E5%B0%8F%E7%B3%BB%E7%BB%9F%E7%94%B5%E8%B7%AF/img/%E8%B0%83%E8%AF%95%E7%AB%AF%E5%8F%A3.png&#34;
+	width=&#34;133&#34;
+	height=&#34;211&#34;
+	srcset=&#34;https://gogopaopao.github.io/newstack/newstack/p/stm32%E5%8D%95%E7%89%87%E6%9C%BA%E7%9A%84%E6%9C%80%E5%B0%8F%E7%B3%BB%E7%BB%9F%E7%94%B5%E8%B7%AF/img/%E8%B0%83%E8%AF%95%E7%AB%AF%E5%8F%A3_hu11841808760361889440.png 480w, https://gogopaopao.github.io/newstack/newstack/p/stm32%E5%8D%95%E7%89%87%E6%9C%BA%E7%9A%84%E6%9C%80%E5%B0%8F%E7%B3%BB%E7%BB%9F%E7%94%B5%E8%B7%AF/img/%E8%B0%83%E8%AF%95%E7%AB%AF%E5%8F%A3_hu220853193625839359.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;63&#34;
+		data-flex-basis=&#34;151px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;5-启动配置电路boot引脚&#34;&gt;5. 启动配置电路——BOOT引脚
+&lt;/h3&gt;&lt;p&gt;​	启动配置通常是通过STM32的BOOT引脚来实现的，这些引脚（如BOOT0和BOOT1）能够支持从内部FLASH启动、系统存储器启动以及内部SRAM启动等多种启动方式。这些启动配置决定了单片机在上电或复位后从哪个存储器区域开始执行程序。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://gogopaopao.github.io/newstack/newstack/p/stm32%E5%8D%95%E7%89%87%E6%9C%BA%E7%9A%84%E6%9C%80%E5%B0%8F%E7%B3%BB%E7%BB%9F%E7%94%B5%E8%B7%AF/img/%E5%90%AF%E5%8A%A8%E7%94%B5%E8%B7%AF.png&#34;
+	width=&#34;411&#34;
+	height=&#34;333&#34;
+	srcset=&#34;https://gogopaopao.github.io/newstack/newstack/p/stm32%E5%8D%95%E7%89%87%E6%9C%BA%E7%9A%84%E6%9C%80%E5%B0%8F%E7%B3%BB%E7%BB%9F%E7%94%B5%E8%B7%AF/img/%E5%90%AF%E5%8A%A8%E7%94%B5%E8%B7%AF_hu5674310640867859659.png 480w, https://gogopaopao.github.io/newstack/newstack/p/stm32%E5%8D%95%E7%89%87%E6%9C%BA%E7%9A%84%E6%9C%80%E5%B0%8F%E7%B3%BB%E7%BB%9F%E7%94%B5%E8%B7%AF/img/%E5%90%AF%E5%8A%A8%E7%94%B5%E8%B7%AF_hu6559387133056072136.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;123&#34;
+		data-flex-basis=&#34;296px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;启动模式&#34;&gt;启动模式
+&lt;/h3&gt;</description>
+        </item>
+        <item>
         <title>STM32单片机被锁</title>
         <link>https://gogopaopao.github.io/newstack/p/stm32%E5%8D%95%E7%89%87%E6%9C%BA%E8%A2%AB%E9%94%81/</link>
         <pubDate>Wed, 22 Apr 2026 10:52:45 +0800</pubDate>
