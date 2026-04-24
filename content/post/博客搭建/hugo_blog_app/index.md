@@ -1,7 +1,7 @@
 +++
 title = 'HUGO博客维护指令速查'
 date = 2026-03-03T00:41:24+08:00
-categories = ["速查","博客搭建"]
+categories = ["置顶","速查","博客搭建"]
 weight = 1
 
 +++

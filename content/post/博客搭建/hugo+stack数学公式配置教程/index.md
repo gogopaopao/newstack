@@ -1,7 +1,8 @@
 +++
 title = 'Hugo+stack数学公式配置教程'
 date = 2026-03-21T16:50:43+08:00
-categories = ["速查","博客搭建"]
+categories = ["置顶","速查","博客搭建"]
+weight = 3
 +++
 
 # Hugo +Stack 博客数学公式配置指南
