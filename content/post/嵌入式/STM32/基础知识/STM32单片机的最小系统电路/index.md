@@ -46,3 +46,6 @@ categories = ["嵌入式","单片机","STM32"]
 ![](img/启动电路.png)
 
 ### 启动模式
+
+> 参考[STM32启动配置速查——BOOT引脚](https://gogopaopao.github.io/newstack/p/stm32启动配置速查boot引脚/)
+
