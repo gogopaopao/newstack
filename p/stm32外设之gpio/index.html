@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="参考文档：STM32单片机自学教程_stm32教程-CSDN博客 我认为GPIO是最基础也是最重要的一个外设 1. GPIO基本结构 右边I/O 引脚是">
+<title>STM32外设之GPIO</title>
+
+<link rel='canonical' href='https://gogopaopao.github.io/newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/'>
+
+<link rel="stylesheet" href="/newstack/scss/style.min.0304c6baf04e01a8fe70693791cb744d56a3578a3120a8796cefc66825aa39c7.css"><meta property='og:title' content="STM32外设之GPIO">
+<meta property='og:description' content="参考文档：STM32单片机自学教程_stm32教程-CSDN博客 我认为GPIO是最基础也是最重要的一个外设 1. GPIO基本结构 右边I/O 引脚是">
+<meta property='og:url' content='https://gogopaopao.github.io/newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/'>
+<meta property='og:site_name' content='从容的老师傅の博客'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-04-25T00:12:38&#43;08:00'/><meta property='article:modified_time' content='2026-04-25T00:12:38&#43;08:00'/>
+<meta name="twitter:title" content="STM32外设之GPIO">
+<meta name="twitter:description" content="参考文档：STM32单片机自学教程_stm32教程-CSDN博客 我认为GPIO是最基础也是最重要的一个外设 1. GPIO基本结构 右边I/O 引脚是">
+    <link rel="shortcut icon" href="/newstack/favicon.ico" />
+
+  
+
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/newstack/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/newstack/img/%E5%A4%B4%E5%83%8F_hu4003009087913957199.jpeg" width="300"
+                            height="303" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">💻</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/newstack">从容的老师傅の博客</a></h1>
+            <h2 class="site-description">欢迎来到我的网站，主要记录个人生活和学习笔记</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/gogopaopao'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/newstack/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/newstack/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/newstack/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/newstack/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/newstack/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-gpio基本结构">1. GPIO基本结构</a>
+      <ul>
+        <li><a href="#2-gpio工作模式">2. GPIO工作模式</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-输入模式">2. 输入模式</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#21-输入浮空">2.1 输入浮空</a></li>
+            <li><a href="#22-输入上拉">2.2 输入上拉</a></li>
+            <li><a href="#23-输入下拉">2.3 输入下拉</a></li>
+            <li><a href="#24-模拟输入">2..4 模拟输入</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#3-输出模式">3. 输出模式</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#31-推挽输出33v-高电平输出">⭐3.1 推挽输出——3.3V 高电平输出</a></li>
+            <li><a href="#32-开漏输出低电平输出高电平需要外部上拉">⭐3.2 开漏输出——低电平输出、高电平需要外部上拉</a></li>
+            <li><a href="#对比表格推挽和开漏">对比表格——推挽和开漏</a></li>
+            <li><a href="#开漏输出模式的应用场景">⭐开漏输出模式的应用场景</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#4-复用功能">4 复用功能</a>
+      <ul>
+        <li><a href="#与普通gpio的对比">与普通GPIO的对比：</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/newstack/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/" >
+                嵌入式
+            </a>
+        
+            <a href="/newstack/categories/%E5%8D%95%E7%89%87%E6%9C%BA/" >
+                单片机
+            </a>
+        
+            <a href="/newstack/categories/stm32/" >
+                STM32
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/">STM32外设之GPIO</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Apr 25, 2026</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 4 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>参考文档：<a class="link" href="https://blog.csdn.net/weixin_42109443/article/details/137303466?ops_request_misc=%7B%22request%5Fid%22%3A%22422bc058503681afd8ab2f949b85ba8c%22%2C%22scm%22%3A%2220140713.130102334..%22%7D&amp;request_id=422bc058503681afd8ab2f949b85ba8c&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-137303466-null-null.142%5ev100%5epc_search_result_base9&amp;utm_term=stm32%e6%95%99%e7%a8%8b&amp;spm=1018.2226.3001.4187"  target="_blank" rel="noopener"
+    >STM32单片机自学教程_stm32教程-CSDN博客</a></p>
+<p>我认为GPIO是最基础也是最重要的一个外设</p>
+<h2 id="1-gpio基本结构">1. GPIO基本结构
+</h2><p>右边I/O 引脚是我们可以看到的芯片实物的引脚，其余部分均为GPIO 的内部结构。
+<img src="/newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/img/%E7%BB%93%E6%9E%84.png"
+	width="1502"
+	height="881"
+	srcset="/newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/img/%E7%BB%93%E6%9E%84_hu1331570238271384226.png 480w, /newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/img/%E7%BB%93%E6%9E%84_hu16802697860368445491.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="170"
+		data-flex-basis="409px"
+	
+></p>
+<p><strong>① 保护二极管</strong>
+👉 不参与模式选择，只负责保护引脚（所有模式都有）</p>
+<blockquote>
+<p>引脚两端接到 VDD / VSS，用于防止过高或过低电压损坏芯片。但只能承受小电流，大电压仍可能烧毁。</p>
+</blockquote>
+<p><strong>② 上拉/下拉电阻</strong>
+👉 决定<strong>输入模式</strong>是不是“上拉 / 下拉 / 浮空”\</p>
+<blockquote>
+<p>上拉 → 默认高电平	下拉 → 默认低电平</p>
+<p>都关 → 浮空（电平不确定）
+属于弱上拉/下拉，大电流需外接。</p>
+</blockquote>
+<p><strong>③ 输入缓冲（施密特触发器）</strong>
+👉 决定能不能当“输入用”（所有输入模式都要它）</p>
+<blockquote>
+<p>在输入模式时，施密特触发器打开，输出被禁止，可通过输入数据寄存器GPIOx_IDR读取I/O状态</p>
+</blockquote>
+<ul>
+<li>且经过施密特触发器后信号<strong>只有0、1两种状态</strong>，关闭用来模拟输入</li>
+</ul>
+<p><strong>④ 输出驱动（PMOS+NMOS）</strong>
+👉 决定能不能“输出”，以及是<strong>推挽还是开漏</strong></p>
+<p><strong>⑤ 输出数据寄存器（ODR）</strong>
+👉 决定输出是高电平还是低电平（写0/1）</p>
+<p><strong>⑥ 输入数据寄存器（IDR）</strong>
+👉 用来读引脚电平（0/1）</p>
+<h3 id="2-gpio工作模式">2. GPIO工作模式
+</h3><p>按<strong>输入</strong>，<strong>输出</strong>和<strong>复用</strong>功能3个大类进行描述</p>
+<h2 id="2-输入模式">2. 输入模式
+</h2><p>​	在输入模式时，<strong>施密特触发器打开</strong>，输出被禁止，可通过输入数据寄存器GPIOx_IDR<strong>读取I/O状态</strong>。其中输入模式，可设置为<strong>上拉、下拉、浮空和模拟</strong>输入四种。</p>
+<h4 id="21-输入浮空">2.1 输入浮空
+</h4><p>上拉/下拉电阻的<strong>开关都断开</strong>，施密特触发器打开。IO口的电平完<strong>全是由外部电路决定</strong>，通常用于按键检测</p>
+<p><img src="/newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/img/%E8%BE%93%E5%85%A5%E6%B5%AE%E7%A9%BA.png"
+	width="1267"
+	height="504"
+	srcset="/newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/img/%E8%BE%93%E5%85%A5%E6%B5%AE%E7%A9%BA_hu17496598116594717450.png 480w, /newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/img/%E8%BE%93%E5%85%A5%E6%B5%AE%E7%A9%BA_hu15451981467995539105.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="251"
+		data-flex-basis="603px"
+	
+></p>
+<h4 id="22-输入上拉">2.2 输入上拉
+</h4><p>上拉电阻导通，施密特触发器打开。</p>
+<p>👉<strong>输入上拉 = 默认高电平，外部拉低触发</strong></p>
+<blockquote>
+<p>在需要外部上拉电阻的时候，可以使用内部上拉电阻，这样可以节省一个外部电阻，但是内部上拉电阻的阻值较大，所以只是“弱上拉”，不适合做电流型驱动。</p>
+</blockquote>
+<p><img src="/newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/img/%E8%BE%93%E5%85%A5%E4%B8%8A%E6%8B%89.png"
+	width="1272"
+	height="510"
+	srcset="/newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/img/%E8%BE%93%E5%85%A5%E4%B8%8A%E6%8B%89_hu3658294265501914082.png 480w, /newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/img/%E8%BE%93%E5%85%A5%E4%B8%8A%E6%8B%89_hu14069361007573355141.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="249"
+		data-flex-basis="598px"
+	
+></p>
+<h4 id="23-输入下拉">2.3 输入下拉
+</h4><p>下拉电阻导通，施密特触发器打开</p>
+<p>👉 **给引脚一个默认低电平（0）**不能做驱动，理由同上拉</p>
+<p><img src="/newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/img/%E8%BE%93%E5%85%A5%E4%B8%8B%E6%8B%89.png"
+	width="1261"
+	height="504"
+	srcset="/newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/img/%E8%BE%93%E5%85%A5%E4%B8%8B%E6%8B%89_hu7991978274850242035.png 480w, /newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/img/%E8%BE%93%E5%85%A5%E4%B8%8B%E6%8B%89_hu2663428569368022949.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="250"
+		data-flex-basis="600px"
+	
+></p>
+<h4 id="24-模拟输入">2..4 模拟输入
+</h4><p>下上下拉电阻断开，施密特触发器关闭</p>
+<blockquote>
+<p>关掉所有数字电路，让引脚直接连到模拟电路，<strong>因为经过施密特触发器后信号只有0、1两种状态</strong></p>
+</blockquote>
+<p><img src="/newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/img/%E6%A8%A1%E6%8B%9F%E8%BE%93%E5%85%A5.png"
+	width="1231"
+	height="496"
+	srcset="/newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/img/%E6%A8%A1%E6%8B%9F%E8%BE%93%E5%85%A5_hu3643828105234781168.png 480w, /newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/img/%E6%A8%A1%E6%8B%9F%E8%BE%93%E5%85%A5_hu11670435974549867507.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="248"
+		data-flex-basis="595px"
+	
+></p>
+<h2 id="3-输出模式">3. 输出模式
+</h2><p><strong>主要是由双MOS管的开闭控制来实现的</strong></p>
+<p><img src="/newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/img/%E8%BE%93%E5%87%BA%E6%A8%A1%E5%BC%8F.png"
+	width="1742"
+	height="419"
+	srcset="/newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/img/%E8%BE%93%E5%87%BA%E6%A8%A1%E5%BC%8F_hu14231092927463082482.png 480w, /newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/img/%E8%BE%93%E5%87%BA%E6%A8%A1%E5%BC%8F_hu10165096775433261086.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="415"
+		data-flex-basis="997px"
+	
+></p>
+<h4 id="31-推挽输出33v-高电平输出">⭐3.1 推挽输出——3.3V 高电平输出
+</h4><p>​	单片机IO<strong>只需提供逻辑控制信号</strong>，通过内部MOS管将引脚切换连接到VCC或GND，使输出电平接近电源电压，并<strong>具备较强的驱动能力</strong>。</p>
+<p><img src="/newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/img/%E6%8E%A8%E6%8C%BD%E6%A8%A1%E5%BC%8F.png"
+	width="1012"
+	height="523"
+	srcset="/newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/img/%E6%8E%A8%E6%8C%BD%E6%A8%A1%E5%BC%8F_hu9710285659191234498.png 480w, /newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/img/%E6%8E%A8%E6%8C%BD%E6%A8%A1%E5%BC%8F_hu9923612668740038469.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="193"
+		data-flex-basis="464px"
+	
+></p>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>INT输入</th>
+<th>反相器输出（到MOS栅极）</th>
+<th>PMOS状态</th>
+<th>NMOS状态</th>
+<th>OUT输出</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>截止</td>
+<td>导通</td>
+<td>0（低电平）</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>导通</td>
+<td>截止</td>
+<td>1（高电平）</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="32-开漏输出低电平输出高电平需要外部上拉">⭐3.2 开漏输出——低电平输出、高电平需要外部上拉
+</h4><p>​	单片机IO只提供控制信号，通过内部NMOS管将引脚拉到GND实现低电平；当NMOS关闭时，引脚处于高阻态，<strong>需要依靠外部上拉电阻将电平拉到VCC</strong>，从而实现高电平输出。</p>
+<p><img src="/newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/img/%E5%BC%80%E6%BC%8F.png"
+	width="1018"
+	height="540"
+	srcset="/newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/img/%E5%BC%80%E6%BC%8F_hu1554070911163988639.png 480w, /newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/img/%E5%BC%80%E6%BC%8F_hu2175041349665590742.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="188"
+		data-flex-basis="452px"
+	
+></p>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>INT输入</th>
+<th>反相器输出（到NMOS）</th>
+<th>NMOS状态</th>
+<th>OUT状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>导通</td>
+<td>0（被拉到GND）</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>截止</td>
+<td>1（被上拉到VCC）</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="对比表格推挽和开漏">对比表格——推挽和开漏
+</h4><div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>推挽输出</th>
+<th>开漏输出</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>输出高电平</td>
+<td>内部PMOS主动拉到VCC</td>
+<td>❌ 不能主动输出</td>
+</tr>
+<tr>
+<td>输出低电平</td>
+<td>内部NMOS主动拉到GND</td>
+<td>NMOS主动拉低</td>
+</tr>
+<tr>
+<td>是否需要上拉电阻</td>
+<td>❌ 不需要</td>
+<td>✅ 必须（外部或内部）</td>
+</tr>
+<tr>
+<td>输出能力</td>
+<td>强（高低都强）</td>
+<td>低（高电平弱）</td>
+</tr>
+<tr>
+<td>结构</td>
+<td>PMOS + NMOS</td>
+<td>只有NMOS</td>
+</tr>
+<tr>
+<td>典型应用</td>
+<td>LED、PWM、普通IO</td>
+<td>I2C、总线、多设备连接、需要更高电压</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="开漏输出模式的应用场景">⭐开漏输出模式的应用场景
+</h4><p>**1. 电平不匹配，需要更高的电压驱动外设 **</p>
+<p>​	<strong>STM32输出的高电平是3.3V</strong></p>
+<p>​	如果外部需要更高或者更低的电压，那么推挽输出就不合适了。此时就可以在<strong>外部接一个上拉电阻</strong>，上拉电源为外部需要的电压，如5V，并且把GPIO设置为开漏模式，当输出高阻态时，由上拉电阻和电源向外输出5伏的电平，输出低电平时则输出低电平0V。</p>
+<p><img src="/newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/img/%E5%BC%80%E6%BC%8F%E5%9C%BA%E6%99%AF.png"
+	width="1094"
+	height="475"
+	srcset="/newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/img/%E5%BC%80%E6%BC%8F%E5%9C%BA%E6%99%AF_hu17704898897749946845.png 480w, /newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/img/%E5%BC%80%E6%BC%8F%E5%9C%BA%E6%99%AF_hu94561707971446073.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="230"
+		data-flex-basis="552px"
+	
+></p>
+<p><strong>2. 需要“线与”功能的总线电路</strong></p>
+<p>​	I2C、总线</p>
+<p>​	多设备连接：每个设备输入能力不同，<strong>设备的高电平不一定能导通PMOS</strong></p>
+<p>​	多个控制器<strong>全部输入1高阻态时则为1</strong>，只要有一个为低电平，那么整个电路就是0.此时推挽输出模式就不可以了，因为有的控制器输入1，PMOS导通，有的控制器输入0，NMOS导通，此时双MOS管都存在导通的情况，直接就短路了。</p>
+<h2 id="4-复用功能">4 复用功能
+</h2><p>GPIO引脚被切换给片上外设使用，<strong>IO口只作为信号通道</strong>，输出由外设控制，不再由ODR控制。</p>
+<p><img src="/newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/img/%E5%A4%8D%E7%94%A8.png"
+	width="1502"
+	height="881"
+	srcset="/newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/img/%E5%A4%8D%E7%94%A8_hu13625543227926217286.png 480w, /newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/img/%E5%A4%8D%E7%94%A8_hu10391502283205083465.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="170"
+		data-flex-basis="409px"
+	
+></p>
+<h3 id="与普通gpio的对比">与普通GPIO的对比：
+</h3><div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>普通GPIO</th>
+<th>复用模式（AF）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>输出控制权</strong></td>
+<td>ODR寄存器（CPU写）</td>
+<td>外设寄存器（UART/SPI/TIM等）</td>
+</tr>
+<tr>
+<td><strong>输入数据来源</strong></td>
+<td>读IDR</td>
+<td>可读IDR，也可读外设寄存器</td>
+</tr>
+<tr>
+<td><strong>IO作用</strong></td>
+<td>通用输入/输出</td>
+<td>作为外设信号通道</td>
+</tr>
+<tr>
+<td><strong>输出类型</strong></td>
+<td>推挽 / 开漏（GPIO配置）</td>
+<td>推挽 / 开漏（仍由GPIO配置）</td>
+</tr>
+<tr>
+<td><strong>上拉/下拉</strong></td>
+<td>GPIO配置</td>
+<td>GPIO配置（同样有效）</td>
+</tr>
+<tr>
+<td><strong>输出速度/驱动</strong></td>
+<td>GPIO配置</td>
+<td>GPIO配置（同样有效）</td>
+</tr>
+<tr>
+<td><strong>是否使用ODR</strong></td>
+<td>✅ 使用</td>
+<td>❌ 不使用（无效）</td>
+</tr>
+<tr>
+<td><strong>信号内容来源</strong></td>
+<td>软件（CPU）</td>
+<td>硬件外设（自动产生/接收）</td>
+</tr>
+<tr>
+<td><strong>典型场景</strong></td>
+<td>点灯、读按键</td>
+<td>UART、SPI、I2C、PWM等</td>
+</tr>
+</tbody>
+</table></div>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/newstack/p/rcc-stm32%E6%97%B6%E9%92%9F%E9%85%8D%E7%BD%AE/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">RCC STM32时钟配置</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/newstack/p/stm32%E5%90%AF%E5%8A%A8%E9%85%8D%E7%BD%AE%E9%80%9F%E6%9F%A5boot%E5%BC%95%E8%84%9A/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">STM32启动配置速查——BOOT引脚</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/newstack/p/stm32%E5%8D%95%E7%89%87%E6%9C%BA%E7%9A%84%E6%9C%80%E5%B0%8F%E7%B3%BB%E7%BB%9F%E7%94%B5%E8%B7%AF/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">STM32单片机的最小系统电路</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/newstack/p/stm32%E5%8D%95%E7%89%87%E6%9C%BA%E8%A2%AB%E9%94%81/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">STM32单片机被锁</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2025 - 
+        
+        2026 gogopaopao
+    </section>
+    
+    <section class="powerby">
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.26.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/newstack/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>gogopaopao</copyright>
-        <lastBuildDate>Sat, 25 Apr 2026 00:36:42 +0800</lastBuildDate><atom:link href="https://gogopaopao.github.io/newstack/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 25 Apr 2026 01:55:48 +0800</lastBuildDate><atom:link href="https://gogopaopao.github.io/newstack/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>HUGO博客维护指令速查</title>
         <link>https://gogopaopao.github.io/newstack/p/hugo%E5%8D%9A%E5%AE%A2%E7%BB%B4%E6%8A%A4%E6%8C%87%E4%BB%A4%E9%80%9F%E6%9F%A5/</link>
         <pubDate>Tue, 03 Mar 2026 00:41:24 +0800</pubDate>
@@ -605,6 +605,14 @@
 </description>
         </item>
         <item>
+        <title>RCC STM32时钟配置</title>
+        <link>https://gogopaopao.github.io/newstack/p/rcc-stm32%E6%97%B6%E9%92%9F%E9%85%8D%E7%BD%AE/</link>
+        <pubDate>Sat, 25 Apr 2026 01:55:48 +0800</pubDate>
+        
+        <guid>https://gogopaopao.github.io/newstack/p/rcc-stm32%E6%97%B6%E9%92%9F%E9%85%8D%E7%BD%AE/</guid>
+        <description></description>
+        </item>
+        <item>
         <title>STM32启动配置速查——BOOT引脚</title>
         <link>https://gogopaopao.github.io/newstack/p/stm32%E5%90%AF%E5%8A%A8%E9%85%8D%E7%BD%AE%E9%80%9F%E6%9F%A5boot%E5%BC%95%E8%84%9A/</link>
         <pubDate>Sat, 25 Apr 2026 00:36:42 +0800</pubDate>
@@ -644,20 +652,349 @@
         <description></description>
         </item>
         <item>
-        <title>PWM</title>
-        <link>https://gogopaopao.github.io/newstack/p/pwm/</link>
-        <pubDate>Sat, 25 Apr 2026 00:12:53 +0800</pubDate>
-        
-        <guid>https://gogopaopao.github.io/newstack/p/pwm/</guid>
-        <description></description>
-        </item>
-        <item>
-        <title>GPIO</title>
-        <link>https://gogopaopao.github.io/newstack/p/gpio/</link>
+        <title>STM32外设之GPIO</title>
+        <link>https://gogopaopao.github.io/newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/</link>
         <pubDate>Sat, 25 Apr 2026 00:12:38 +0800</pubDate>
         
-        <guid>https://gogopaopao.github.io/newstack/p/gpio/</guid>
-        <description></description>
+        <guid>https://gogopaopao.github.io/newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/</guid>
+        <description>&lt;p&gt;参考文档：&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/weixin_42109443/article/details/137303466?ops_request_misc=%7B%22request%5Fid%22%3A%22422bc058503681afd8ab2f949b85ba8c%22%2C%22scm%22%3A%2220140713.130102334..%22%7D&amp;amp;request_id=422bc058503681afd8ab2f949b85ba8c&amp;amp;biz_id=0&amp;amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-137303466-null-null.142%5ev100%5epc_search_result_base9&amp;amp;utm_term=stm32%e6%95%99%e7%a8%8b&amp;amp;spm=1018.2226.3001.4187&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;STM32单片机自学教程_stm32教程-CSDN博客&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;我认为GPIO是最基础也是最重要的一个外设&lt;/p&gt;
+&lt;h2 id=&#34;1-gpio基本结构&#34;&gt;1. GPIO基本结构
+&lt;/h2&gt;&lt;p&gt;右边I/O 引脚是我们可以看到的芯片实物的引脚，其余部分均为GPIO 的内部结构。
+&lt;img src=&#34;https://gogopaopao.github.io/newstack/newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/img/%E7%BB%93%E6%9E%84.png&#34;
+	width=&#34;1502&#34;
+	height=&#34;881&#34;
+	srcset=&#34;https://gogopaopao.github.io/newstack/newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/img/%E7%BB%93%E6%9E%84_hu1331570238271384226.png 480w, https://gogopaopao.github.io/newstack/newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/img/%E7%BB%93%E6%9E%84_hu16802697860368445491.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;170&#34;
+		data-flex-basis=&#34;409px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;① 保护二极管&lt;/strong&gt;
+👉 不参与模式选择，只负责保护引脚（所有模式都有）&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;引脚两端接到 VDD / VSS，用于防止过高或过低电压损坏芯片。但只能承受小电流，大电压仍可能烧毁。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;② 上拉/下拉电阻&lt;/strong&gt;
+👉 决定&lt;strong&gt;输入模式&lt;/strong&gt;是不是“上拉 / 下拉 / 浮空”\&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;上拉 → 默认高电平	下拉 → 默认低电平&lt;/p&gt;
+&lt;p&gt;都关 → 浮空（电平不确定）
+属于弱上拉/下拉，大电流需外接。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;③ 输入缓冲（施密特触发器）&lt;/strong&gt;
+👉 决定能不能当“输入用”（所有输入模式都要它）&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;在输入模式时，施密特触发器打开，输出被禁止，可通过输入数据寄存器GPIOx_IDR读取I/O状态&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;且经过施密特触发器后信号&lt;strong&gt;只有0、1两种状态&lt;/strong&gt;，关闭用来模拟输入&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;④ 输出驱动（PMOS+NMOS）&lt;/strong&gt;
+👉 决定能不能“输出”，以及是&lt;strong&gt;推挽还是开漏&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;⑤ 输出数据寄存器（ODR）&lt;/strong&gt;
+👉 决定输出是高电平还是低电平（写0/1）&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;⑥ 输入数据寄存器（IDR）&lt;/strong&gt;
+👉 用来读引脚电平（0/1）&lt;/p&gt;
+&lt;h3 id=&#34;2-gpio工作模式&#34;&gt;2. GPIO工作模式
+&lt;/h3&gt;&lt;p&gt;按&lt;strong&gt;输入&lt;/strong&gt;，&lt;strong&gt;输出&lt;/strong&gt;和&lt;strong&gt;复用&lt;/strong&gt;功能3个大类进行描述&lt;/p&gt;
+&lt;h2 id=&#34;2-输入模式&#34;&gt;2. 输入模式
+&lt;/h2&gt;&lt;p&gt;​	在输入模式时，&lt;strong&gt;施密特触发器打开&lt;/strong&gt;，输出被禁止，可通过输入数据寄存器GPIOx_IDR&lt;strong&gt;读取I/O状态&lt;/strong&gt;。其中输入模式，可设置为&lt;strong&gt;上拉、下拉、浮空和模拟&lt;/strong&gt;输入四种。&lt;/p&gt;
+&lt;h4 id=&#34;21-输入浮空&#34;&gt;2.1 输入浮空
+&lt;/h4&gt;&lt;p&gt;上拉/下拉电阻的&lt;strong&gt;开关都断开&lt;/strong&gt;，施密特触发器打开。IO口的电平完&lt;strong&gt;全是由外部电路决定&lt;/strong&gt;，通常用于按键检测&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://gogopaopao.github.io/newstack/newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/img/%E8%BE%93%E5%85%A5%E6%B5%AE%E7%A9%BA.png&#34;
+	width=&#34;1267&#34;
+	height=&#34;504&#34;
+	srcset=&#34;https://gogopaopao.github.io/newstack/newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/img/%E8%BE%93%E5%85%A5%E6%B5%AE%E7%A9%BA_hu17496598116594717450.png 480w, https://gogopaopao.github.io/newstack/newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/img/%E8%BE%93%E5%85%A5%E6%B5%AE%E7%A9%BA_hu15451981467995539105.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;251&#34;
+		data-flex-basis=&#34;603px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h4 id=&#34;22-输入上拉&#34;&gt;2.2 输入上拉
+&lt;/h4&gt;&lt;p&gt;上拉电阻导通，施密特触发器打开。&lt;/p&gt;
+&lt;p&gt;👉&lt;strong&gt;输入上拉 = 默认高电平，外部拉低触发&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;在需要外部上拉电阻的时候，可以使用内部上拉电阻，这样可以节省一个外部电阻，但是内部上拉电阻的阻值较大，所以只是“弱上拉”，不适合做电流型驱动。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;https://gogopaopao.github.io/newstack/newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/img/%E8%BE%93%E5%85%A5%E4%B8%8A%E6%8B%89.png&#34;
+	width=&#34;1272&#34;
+	height=&#34;510&#34;
+	srcset=&#34;https://gogopaopao.github.io/newstack/newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/img/%E8%BE%93%E5%85%A5%E4%B8%8A%E6%8B%89_hu3658294265501914082.png 480w, https://gogopaopao.github.io/newstack/newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/img/%E8%BE%93%E5%85%A5%E4%B8%8A%E6%8B%89_hu14069361007573355141.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;249&#34;
+		data-flex-basis=&#34;598px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h4 id=&#34;23-输入下拉&#34;&gt;2.3 输入下拉
+&lt;/h4&gt;&lt;p&gt;下拉电阻导通，施密特触发器打开&lt;/p&gt;
+&lt;p&gt;👉 **给引脚一个默认低电平（0）**不能做驱动，理由同上拉&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://gogopaopao.github.io/newstack/newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/img/%E8%BE%93%E5%85%A5%E4%B8%8B%E6%8B%89.png&#34;
+	width=&#34;1261&#34;
+	height=&#34;504&#34;
+	srcset=&#34;https://gogopaopao.github.io/newstack/newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/img/%E8%BE%93%E5%85%A5%E4%B8%8B%E6%8B%89_hu7991978274850242035.png 480w, https://gogopaopao.github.io/newstack/newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/img/%E8%BE%93%E5%85%A5%E4%B8%8B%E6%8B%89_hu2663428569368022949.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;250&#34;
+		data-flex-basis=&#34;600px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h4 id=&#34;24-模拟输入&#34;&gt;2..4 模拟输入
+&lt;/h4&gt;&lt;p&gt;下上下拉电阻断开，施密特触发器关闭&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;关掉所有数字电路，让引脚直接连到模拟电路，&lt;strong&gt;因为经过施密特触发器后信号只有0、1两种状态&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;https://gogopaopao.github.io/newstack/newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/img/%E6%A8%A1%E6%8B%9F%E8%BE%93%E5%85%A5.png&#34;
+	width=&#34;1231&#34;
+	height=&#34;496&#34;
+	srcset=&#34;https://gogopaopao.github.io/newstack/newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/img/%E6%A8%A1%E6%8B%9F%E8%BE%93%E5%85%A5_hu3643828105234781168.png 480w, https://gogopaopao.github.io/newstack/newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/img/%E6%A8%A1%E6%8B%9F%E8%BE%93%E5%85%A5_hu11670435974549867507.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;248&#34;
+		data-flex-basis=&#34;595px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;3-输出模式&#34;&gt;3. 输出模式
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;主要是由双MOS管的开闭控制来实现的&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://gogopaopao.github.io/newstack/newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/img/%E8%BE%93%E5%87%BA%E6%A8%A1%E5%BC%8F.png&#34;
+	width=&#34;1742&#34;
+	height=&#34;419&#34;
+	srcset=&#34;https://gogopaopao.github.io/newstack/newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/img/%E8%BE%93%E5%87%BA%E6%A8%A1%E5%BC%8F_hu14231092927463082482.png 480w, https://gogopaopao.github.io/newstack/newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/img/%E8%BE%93%E5%87%BA%E6%A8%A1%E5%BC%8F_hu10165096775433261086.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;415&#34;
+		data-flex-basis=&#34;997px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h4 id=&#34;31-推挽输出33v-高电平输出&#34;&gt;⭐3.1 推挽输出——3.3V 高电平输出
+&lt;/h4&gt;&lt;p&gt;​	单片机IO&lt;strong&gt;只需提供逻辑控制信号&lt;/strong&gt;，通过内部MOS管将引脚切换连接到VCC或GND，使输出电平接近电源电压，并&lt;strong&gt;具备较强的驱动能力&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://gogopaopao.github.io/newstack/newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/img/%E6%8E%A8%E6%8C%BD%E6%A8%A1%E5%BC%8F.png&#34;
+	width=&#34;1012&#34;
+	height=&#34;523&#34;
+	srcset=&#34;https://gogopaopao.github.io/newstack/newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/img/%E6%8E%A8%E6%8C%BD%E6%A8%A1%E5%BC%8F_hu9710285659191234498.png 480w, https://gogopaopao.github.io/newstack/newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/img/%E6%8E%A8%E6%8C%BD%E6%A8%A1%E5%BC%8F_hu9923612668740038469.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;193&#34;
+		data-flex-basis=&#34;464px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;INT输入&lt;/th&gt;
+&lt;th&gt;反相器输出（到MOS栅极）&lt;/th&gt;
+&lt;th&gt;PMOS状态&lt;/th&gt;
+&lt;th&gt;NMOS状态&lt;/th&gt;
+&lt;th&gt;OUT输出&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;0&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;截止&lt;/td&gt;
+&lt;td&gt;导通&lt;/td&gt;
+&lt;td&gt;0（低电平）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;0&lt;/td&gt;
+&lt;td&gt;导通&lt;/td&gt;
+&lt;td&gt;截止&lt;/td&gt;
+&lt;td&gt;1（高电平）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h4 id=&#34;32-开漏输出低电平输出高电平需要外部上拉&#34;&gt;⭐3.2 开漏输出——低电平输出、高电平需要外部上拉
+&lt;/h4&gt;&lt;p&gt;​	单片机IO只提供控制信号，通过内部NMOS管将引脚拉到GND实现低电平；当NMOS关闭时，引脚处于高阻态，&lt;strong&gt;需要依靠外部上拉电阻将电平拉到VCC&lt;/strong&gt;，从而实现高电平输出。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://gogopaopao.github.io/newstack/newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/img/%E5%BC%80%E6%BC%8F.png&#34;
+	width=&#34;1018&#34;
+	height=&#34;540&#34;
+	srcset=&#34;https://gogopaopao.github.io/newstack/newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/img/%E5%BC%80%E6%BC%8F_hu1554070911163988639.png 480w, https://gogopaopao.github.io/newstack/newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/img/%E5%BC%80%E6%BC%8F_hu2175041349665590742.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;188&#34;
+		data-flex-basis=&#34;452px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;INT输入&lt;/th&gt;
+&lt;th&gt;反相器输出（到NMOS）&lt;/th&gt;
+&lt;th&gt;NMOS状态&lt;/th&gt;
+&lt;th&gt;OUT状态&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;0&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;导通&lt;/td&gt;
+&lt;td&gt;0（被拉到GND）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;0&lt;/td&gt;
+&lt;td&gt;截止&lt;/td&gt;
+&lt;td&gt;1（被上拉到VCC）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h4 id=&#34;对比表格推挽和开漏&#34;&gt;对比表格——推挽和开漏
+&lt;/h4&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;项目&lt;/th&gt;
+&lt;th&gt;推挽输出&lt;/th&gt;
+&lt;th&gt;开漏输出&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;输出高电平&lt;/td&gt;
+&lt;td&gt;内部PMOS主动拉到VCC&lt;/td&gt;
+&lt;td&gt;❌ 不能主动输出&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;输出低电平&lt;/td&gt;
+&lt;td&gt;内部NMOS主动拉到GND&lt;/td&gt;
+&lt;td&gt;NMOS主动拉低&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;是否需要上拉电阻&lt;/td&gt;
+&lt;td&gt;❌ 不需要&lt;/td&gt;
+&lt;td&gt;✅ 必须（外部或内部）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;输出能力&lt;/td&gt;
+&lt;td&gt;强（高低都强）&lt;/td&gt;
+&lt;td&gt;低（高电平弱）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;结构&lt;/td&gt;
+&lt;td&gt;PMOS + NMOS&lt;/td&gt;
+&lt;td&gt;只有NMOS&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;典型应用&lt;/td&gt;
+&lt;td&gt;LED、PWM、普通IO&lt;/td&gt;
+&lt;td&gt;I2C、总线、多设备连接、需要更高电压&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h4 id=&#34;开漏输出模式的应用场景&#34;&gt;⭐开漏输出模式的应用场景
+&lt;/h4&gt;&lt;p&gt;**1. 电平不匹配，需要更高的电压驱动外设 **&lt;/p&gt;
+&lt;p&gt;​	&lt;strong&gt;STM32输出的高电平是3.3V&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;​	如果外部需要更高或者更低的电压，那么推挽输出就不合适了。此时就可以在&lt;strong&gt;外部接一个上拉电阻&lt;/strong&gt;，上拉电源为外部需要的电压，如5V，并且把GPIO设置为开漏模式，当输出高阻态时，由上拉电阻和电源向外输出5伏的电平，输出低电平时则输出低电平0V。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://gogopaopao.github.io/newstack/newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/img/%E5%BC%80%E6%BC%8F%E5%9C%BA%E6%99%AF.png&#34;
+	width=&#34;1094&#34;
+	height=&#34;475&#34;
+	srcset=&#34;https://gogopaopao.github.io/newstack/newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/img/%E5%BC%80%E6%BC%8F%E5%9C%BA%E6%99%AF_hu17704898897749946845.png 480w, https://gogopaopao.github.io/newstack/newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/img/%E5%BC%80%E6%BC%8F%E5%9C%BA%E6%99%AF_hu94561707971446073.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;230&#34;
+		data-flex-basis=&#34;552px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;2. 需要“线与”功能的总线电路&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;​	I2C、总线&lt;/p&gt;
+&lt;p&gt;​	多设备连接：每个设备输入能力不同，&lt;strong&gt;设备的高电平不一定能导通PMOS&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;​	多个控制器&lt;strong&gt;全部输入1高阻态时则为1&lt;/strong&gt;，只要有一个为低电平，那么整个电路就是0.此时推挽输出模式就不可以了，因为有的控制器输入1，PMOS导通，有的控制器输入0，NMOS导通，此时双MOS管都存在导通的情况，直接就短路了。&lt;/p&gt;
+&lt;h2 id=&#34;4-复用功能&#34;&gt;4 复用功能
+&lt;/h2&gt;&lt;p&gt;GPIO引脚被切换给片上外设使用，&lt;strong&gt;IO口只作为信号通道&lt;/strong&gt;，输出由外设控制，不再由ODR控制。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://gogopaopao.github.io/newstack/newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/img/%E5%A4%8D%E7%94%A8.png&#34;
+	width=&#34;1502&#34;
+	height=&#34;881&#34;
+	srcset=&#34;https://gogopaopao.github.io/newstack/newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/img/%E5%A4%8D%E7%94%A8_hu13625543227926217286.png 480w, https://gogopaopao.github.io/newstack/newstack/p/stm32%E5%A4%96%E8%AE%BE%E4%B9%8Bgpio/img/%E5%A4%8D%E7%94%A8_hu10391502283205083465.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;170&#34;
+		data-flex-basis=&#34;409px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;与普通gpio的对比&#34;&gt;与普通GPIO的对比：
+&lt;/h3&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;项目&lt;/th&gt;
+&lt;th&gt;普通GPIO&lt;/th&gt;
+&lt;th&gt;复用模式（AF）&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;输出控制权&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;ODR寄存器（CPU写）&lt;/td&gt;
+&lt;td&gt;外设寄存器（UART/SPI/TIM等）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;输入数据来源&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;读IDR&lt;/td&gt;
+&lt;td&gt;可读IDR，也可读外设寄存器&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;IO作用&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;通用输入/输出&lt;/td&gt;
+&lt;td&gt;作为外设信号通道&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;输出类型&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;推挽 / 开漏（GPIO配置）&lt;/td&gt;
+&lt;td&gt;推挽 / 开漏（仍由GPIO配置）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;上拉/下拉&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;GPIO配置&lt;/td&gt;
+&lt;td&gt;GPIO配置（同样有效）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;输出速度/驱动&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;GPIO配置&lt;/td&gt;
+&lt;td&gt;GPIO配置（同样有效）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;是否使用ODR&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;✅ 使用&lt;/td&gt;
+&lt;td&gt;❌ 不使用（无效）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;信号内容来源&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;软件（CPU）&lt;/td&gt;
+&lt;td&gt;硬件外设（自动产生/接收）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;典型场景&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;点灯、读按键&lt;/td&gt;
+&lt;td&gt;UART、SPI、I2C、PWM等&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+</description>
         </item>
         <item>
         <title>STM32单片机的最小系统电路</title>
@@ -744,7 +1081,11 @@
 	
 &gt;&lt;/p&gt;
 &lt;h3 id=&#34;启动模式&#34;&gt;启动模式
-&lt;/h3&gt;</description>
+&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;参考&lt;a class=&#34;link&#34; href=&#34;https://gogopaopao.github.io/newstack/p/stm32%e5%90%af%e5%8a%a8%e9%85%8d%e7%bd%ae%e9%80%9f%e6%9f%a5boot%e5%bc%95%e8%84%9a/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;STM32启动配置速查——BOOT引脚&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
         </item>
         <item>
         <title>STM32单片机被锁</title>
