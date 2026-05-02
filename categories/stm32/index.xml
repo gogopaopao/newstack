@@ -8,12 +8,36 @@
         <language>zh-cn</language>
         <copyright>gogopaopao</copyright>
         <lastBuildDate>Sat, 25 Apr 2026 01:55:48 +0800</lastBuildDate><atom:link href="https://gogopaopao.github.io/newstack/categories/stm32/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>RCC STM32时钟配置</title>
-        <link>https://gogopaopao.github.io/newstack/p/rcc-stm32%E6%97%B6%E9%92%9F%E9%85%8D%E7%BD%AE/</link>
+        <title>RCC——STM32时钟树</title>
+        <link>https://gogopaopao.github.io/newstack/p/rccstm32%E6%97%B6%E9%92%9F%E6%A0%91/</link>
         <pubDate>Sat, 25 Apr 2026 01:55:48 +0800</pubDate>
         
-        <guid>https://gogopaopao.github.io/newstack/p/rcc-stm32%E6%97%B6%E9%92%9F%E9%85%8D%E7%BD%AE/</guid>
-        <description></description>
+        <guid>https://gogopaopao.github.io/newstack/p/rccstm32%E6%97%B6%E9%92%9F%E6%A0%91/</guid>
+        <description>&lt;p&gt;问题来源于我对时钟树，SysCLK和SysTick的混淆理解。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://gogopaopao.github.io/newstack/newstack/p/rccstm32%E6%97%B6%E9%92%9F%E6%A0%91/img/%E4%B8%89%E8%80%85%E5%85%B3%E7%B3%BB%E5%9B%BE.png&#34;
+	width=&#34;190&#34;
+	height=&#34;164&#34;
+	srcset=&#34;https://gogopaopao.github.io/newstack/newstack/p/rccstm32%E6%97%B6%E9%92%9F%E6%A0%91/img/%E4%B8%89%E8%80%85%E5%85%B3%E7%B3%BB%E5%9B%BE_hu5579098253190593432.png 480w, https://gogopaopao.github.io/newstack/newstack/p/rccstm32%E6%97%B6%E9%92%9F%E6%A0%91/img/%E4%B8%89%E8%80%85%E5%85%B3%E7%B3%BB%E5%9B%BE_hu3020660606046934244.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;115&#34;
+		data-flex-basis=&#34;278px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;RCC ： reset clock control 复位和时钟控制器。&lt;/p&gt;
+&lt;p&gt;​	MCU都是基于&lt;strong&gt;时序&lt;/strong&gt;控制的，时序系统对MCU非常重要，因此在MCU设计时就设计了专门用于控制时序的电路，在芯片设计中称为时钟树设计。由此设计出来的时钟，可以精确控制我们的单片机 系统。一个MCU越复杂，时钟系统也会相应地变得复杂，如STM32F1的时钟系统比较复杂，不像简单的51单片机一个系统时钟就可以解决一切。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;为什么叫时钟树而不是时钟？&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;​	对于STM32F1系列的芯片，正常工作的主频可以达到72Mhz，但并不是所有外设都需要系统时钟这么高的频率，比如看门狗以及RTC只需要几十kHZ的时钟即可。同一个电路，&lt;strong&gt;时钟越快功耗越大&lt;/strong&gt;，同时&lt;strong&gt;抗电磁干扰能力也会越弱&lt;/strong&gt;，所以对于较为复杂的MCU一般都是采取&lt;strong&gt;多时钟源&lt;/strong&gt;的方法来解决这些问题。所以我们称为&lt;strong&gt;时钟树&lt;/strong&gt;而不是时钟。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;时钟树 = 时钟源 + &lt;strong&gt;处理&lt;/strong&gt;（PLL/分频）+ &lt;strong&gt;分发&lt;/strong&gt;（总线/外设）&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;1-输入时钟源&#34;&gt;1. 输入时钟源
+&lt;/h3&gt;&lt;p&gt;​	对于STM32F1系列单片机，输入时钟源（InputClock）主要包括四种，即&lt;strong&gt;HSI&lt;/strong&gt;，&lt;strong&gt;HSE&lt;/strong&gt;，&lt;strong&gt;LSI&lt;/strong&gt;，&lt;strong&gt;LSE&lt;/strong&gt;。其中，从时钟频率来分可以分为高速时钟源和低速时钟源，其中HIS和HSE为高速时钟，LSI和LSE是低速时钟。从来源可分为外部时钟源和内部时钟源，外部时钟源就是从外部通过接晶振的方式获取时钟源，其中HSE和LSE是外部时钟源；其他是内部时钟源，芯片上电即可产生，不需要借助外部电路。&lt;/p&gt;
+</description>
         </item>
         <item>
         <title>STM32启动配置速查——BOOT引脚</title>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>PCB on 从容的老师傅の博客</title>
+        <link>https://gogopaopao.github.io/newstack/categories/pcb/</link>
+        <description>Recent content in PCB on 从容的老师傅の博客</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>gogopaopao</copyright>
+        <lastBuildDate>Sat, 25 Apr 2026 23:31:59 +0800</lastBuildDate><atom:link href="https://gogopaopao.github.io/newstack/categories/pcb/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>PCB绘制须知</title>
+        <link>https://gogopaopao.github.io/newstack/p/pcb%E7%BB%98%E5%88%B6%E9%A1%BB%E7%9F%A5/</link>
+        <pubDate>Sat, 25 Apr 2026 23:31:59 +0800</pubDate>
+        
+        <guid>https://gogopaopao.github.io/newstack/p/pcb%E7%BB%98%E5%88%B6%E9%A1%BB%E7%9F%A5/</guid>
+        <description>&lt;p&gt;&lt;strong&gt;一般原则：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;信号线宽10~15mil。一般是11mil。&lt;/li&gt;
+&lt;li&gt;不能走锐角线，直角线也尽量不要。&lt;/li&gt;
+&lt;li&gt;对于细引脚来说，使用的线径最好在不超过引脚宽度的情况下尽可能宽。&lt;/li&gt;
+&lt;li&gt;过孔孔径一般可选12，24&lt;/li&gt;
+&lt;li&gt;双面板的两面导线尽量避免平行走线&lt;/li&gt;
+&lt;li&gt;信号线不要形成环路，如果必须有环路，那么越小越好&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;pcb快捷键&#34;&gt;PCB快捷键
+&lt;/h2&gt;&lt;p&gt;W：绘制走线	V：放置过孔
+T：上层		B: 下层&lt;/p&gt;
+&lt;h3 id=&#34;走线与绘制&#34;&gt;走线与绘制：
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;W：绘制走线&lt;/strong&gt;
+U/C：绘制圆弧/圆形
+N/S/O：放置尺寸、文本、连接线
+E：绘制铺铜&lt;/p&gt;
+&lt;h3 id=&#34;层切换与元件操作&#34;&gt;层切换与元件操作：
+&lt;/h3&gt;&lt;p&gt;T：切换至顶层/底层（选中封装时调整层属性）
+数字键 1-4：切换至内层1～4
+P：放置焊盘
+Q：切换画布单位
+&lt;strong&gt;V：放置过孔&lt;/strong&gt;
+M：量测距离
+H：高亮当前网络（连续按可切换高亮状态）
+L：改变布线角度&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

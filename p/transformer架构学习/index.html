@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Transformer架构学习，基于动画教程理解和GPT问答，我的毕设只涉及了他的多头自注意力机制，所以本文没有涉及译码器部分。 总结构图 一个">
+<title>Transformer架构学习</title>
+
+<link rel='canonical' href='https://gogopaopao.github.io/newstack/p/transformer%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0/'>
+
+<link rel="stylesheet" href="/newstack/scss/style.min.0304c6baf04e01a8fe70693791cb744d56a3578a3120a8796cefc66825aa39c7.css"><meta property='og:title' content="Transformer架构学习">
+<meta property='og:description' content="Transformer架构学习，基于动画教程理解和GPT问答，我的毕设只涉及了他的多头自注意力机制，所以本文没有涉及译码器部分。 总结构图 一个">
+<meta property='og:url' content='https://gogopaopao.github.io/newstack/p/transformer%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0/'>
+<meta property='og:site_name' content='从容的老师傅の博客'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-05-01T01:35:24&#43;08:00'/><meta property='article:modified_time' content='2026-05-01T01:35:24&#43;08:00'/>
+<meta name="twitter:title" content="Transformer架构学习">
+<meta name="twitter:description" content="Transformer架构学习，基于动画教程理解和GPT问答，我的毕设只涉及了他的多头自注意力机制，所以本文没有涉及译码器部分。 总结构图 一个">
+    <link rel="shortcut icon" href="/newstack/favicon.ico" />
+
+  
+
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/newstack/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/newstack/img/%E5%A4%B4%E5%83%8F_hu4003009087913957199.jpeg" width="300"
+                            height="303" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">💻</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/newstack">从容的老师傅の博客</a></h1>
+            <h2 class="site-description">欢迎来到我的网站，主要记录个人生活和学习笔记</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/gogopaopao'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/newstack/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/newstack/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/newstack/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/newstack/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/newstack/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#总结构图">总结构图</a></li>
+    <li><a href="#transformer-流程起点词嵌入embedding">Transformer 流程起点——词嵌入Embedding</a>
+      <ul>
+        <li><a href="#-embedding-矩阵">🔹 Embedding 矩阵</a></li>
+        <li><a href="#-实现机制">🔹 实现机制</a></li>
+        <li><a href="#-类比理解">🔹 类比理解</a></li>
+        <li><a href="#-总结">🔹 总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#起点第二步位置编码">起点第二步——位置编码</a></li>
+    <li><a href="#自注意力机制单头">⭐自注意力机制（单头）</a>
+      <ul>
+        <li><a href="#-实现机制-1">🔹 实现机制</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#q和k的意思也是人为理解的啊为了方便理解这么说但实际都是黑盒吧除了左乘和右乘的区别外没别的区别">Q和K的意思也是人为理解的啊，为了方便理解这么说但实际都是黑盒吧，除了左乘和右乘的区别外没别的区别</a></li>
+        <li><a href="#1-q的功能性解释怎么理解">1. Q的功能性解释怎么理解</a></li>
+        <li><a href="#2-k的功能性解释怎么理解">2. K的功能性解释怎么理解</a></li>
+        <li><a href="#3-v的功能性解释怎么理解">3. V的功能性解释怎么理解</a></li>
+        <li><a href="#为什么叫自注意力机制和注意力机制的区别">为什么叫自注意力机制，和注意力机制的区别？</a></li>
+      </ul>
+    </li>
+    <li><a href="#多自注意力机制">⭐⭐⭐多自注意力机制</a>
+      <ul>
+        <li><a href="#多头注意力的核心思想">多头注意力的核心思想</a></li>
+        <li><a href="#为什么要多个-head">为什么要多个 head？</a></li>
+        <li><a href="#多个-head-怎么合并">多个 head 怎么合并？</a></li>
+        <li><a href="#总结">总结：</a></li>
+      </ul>
+    </li>
+    <li><a href="#addnorm">⭐Add&amp;Norm</a></li>
+    <li><a href="#-ffn">⭐ FFN</a></li>
+    <li><a href="#encoder-堆叠">⭐Encoder 堆叠</a></li>
+    <li><a href="#那transformer并行计算的特点怎么展现的">那transformer并行计算的特点怎么展现的？</a></li>
+    <li><a href="#问题">问题</a></li>
+    <li><a href="#qkᵀ-的真实含义核心">QKᵀ 的真实含义（核心）</a>
+      <ul>
+        <li><a href="#softmax的t">softmax的T</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/newstack/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" >
+                深度学习
+            </a>
+        
+            <a href="/newstack/categories/%E7%BB%8F%E5%85%B8%E6%A8%A1%E5%9E%8B/" >
+                经典模型
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/newstack/p/transformer%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0/">Transformer架构学习</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">May 01, 2026</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 10 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>Transformer架构学习，基于动画教程理解和GPT问答，我的毕设只涉及了他的多头自注意力机制，所以本文没有涉及译码器部分。</p>
+<h2 id="总结构图">总结构图
+</h2><p><img src="/newstack/p/transformer%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0/img/%E6%80%BB%E7%BB%93%E6%9E%84%E5%9B%BE.png"
+	width="554"
+	height="705"
+	srcset="/newstack/p/transformer%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0/img/%E6%80%BB%E7%BB%93%E6%9E%84%E5%9B%BE_hu15087269705544587442.png 480w, /newstack/p/transformer%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0/img/%E6%80%BB%E7%BB%93%E6%9E%84%E5%9B%BE_hu3045176903240678899.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="78"
+		data-flex-basis="188px"
+	
+></p>
+<p>一个完整的 Encoder Block 的内部结构：
+</p>
+$$
+X \rightarrow MultiHeadAttention \rightarrow Add\&Norm \rightarrow FFN \rightarrow Add\&Norm
+$$
+<h2 id="transformer-流程起点词嵌入embedding">Transformer 流程起点——词嵌入Embedding
+</h2><p>输入的 token 首先经过 embedding 层，将离散的 token 映射为连续向量，用于编码语义信息。每个 token 对应 embedding 矩阵的一行，形成一个 $d$ 维向量，也就是一组数字：
+</p>
+$$
+x_i \in \mathbb{R}^d
+$$
+<p>
+这些向量作为模型后续计算（如 Attention）的基础输入。</p>
+<hr>
+<h3 id="-embedding-矩阵">🔹 Embedding 矩阵
+</h3><p>Embedding 矩阵记作：
+</p>
+$$
+W_e \in \mathbb{R}^{V \times d}
+$$
+<ul>
+<li>
+<p><strong>V</strong>：词表大小（行数，由人为设定的超参数）</p>
+</li>
+<li>
+<p><strong>d</strong>：向量维度（列数，由人为设定的超参数）</p>
+</li>
+</ul>
+<p>​	矩阵的每一行对应一个 token 的向量表示，初始值随机生成，不是人为编码，而是<strong>模型的第一层权重</strong>。在训练过程中，embedding 会通过梯度优化不断更新，使得语义相似的 token 在向量空间中距离更接近。</p>
+<p>常见 d 值：</p>
+<ul>
+<li>小模型：128 / 256</li>
+<li>中等模型：512 / 768</li>
+<li>GPT-3：12288</li>
+</ul>
+<p>维度 d 决定 token 的表示能力，同时影响参数量 $V \times d$ 和计算成本。</p>
+<hr>
+<h3 id="-实现机制">🔹 实现机制
+</h3><p><strong>输入不是</strong>整个 Embedding 矩阵 $W_e$，而是当前 token ids 从 $W_e$ 中查表得到的 embedding 向量序列。</p>
+<p>Embedding 实质上是查表（lookup）操作：
+</p>
+$$
+ x_i = W_e[\text{id}_i]
+$$
+<ul>
+<li>
+<p>每个 token 的 id 用来索引 <strong>embedding 矩阵</strong>的一行</p>
+</li>
+<li>
+<p>得到对应的向量表示</p>
+<blockquote>
+<p>这意味着 embedding 不是预处理，而是模型可训练的一部分，通过训练学习语义表示</p>
+</blockquote>
+<p>说是要把token对应成向量，通过查表来，表怎么来的？表就是 <strong>embedding 矩阵</strong></p>
+<p>查表操作本质上等价于 one-hot 向量与 embedding 矩阵相乘：
+</p>
+$$
+   X_{emb}=OW_e
+   $$
+<p>
+实际实现中不会真的构造 one-hot 矩阵，而是直接用 token id 索引 $W_e$ 的对应行。</p>
+</li>
+</ul>
+<hr>
+<h3 id="-类比理解">🔹 类比理解
+</h3><p>可以把 embedding 理解为：</p>
+<ul>
+<li><strong>加密</strong>：将 token 编码成向量信号，在模型内部进行处理</li>
+<li><strong>解码（unembedding）</strong>：通过输出层将向量映射回词表概率，实现 token 的预测</li>
+</ul>
+<hr>
+<h3 id="-总结">🔹 总结
+</h3><p><strong>Embedding 层通过查表将每个 token 映射为一个 d 维向量，矩阵维度由超参数 V 和 d 决定，向量初始随机，在训练过程中学习语义表示，是 Transformer 输入处理的第一步核心参数。</strong></p>
+<p><img src="/newstack/p/transformer%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0/img/%E8%AF%8D%E5%B5%8C%E5%85%A5%E7%BC%96%E7%A0%81.png"
+	width="935"
+	height="599"
+	srcset="/newstack/p/transformer%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0/img/%E8%AF%8D%E5%B5%8C%E5%85%A5%E7%BC%96%E7%A0%81_hu9315073052108600837.png 480w, /newstack/p/transformer%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0/img/%E8%AF%8D%E5%B5%8C%E5%85%A5%E7%BC%96%E7%A0%81_hu17839999877814086047.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="156"
+		data-flex-basis="374px"
+	
+></p>
+<p>数据可视化之后就是，越相近的两个词，位置越接近。</p>
+<p>👉<strong>语义相似的词，在向量空间中距离更近</strong></p>
+<p>⚠ 但注意：这不是人为编码的，属于权重，是训练过程中自动学习得到的</p>
+<p>原因：</p>
+<blockquote>
+<p>相似词出现在相似上下文中，模型为了降低预测误差，会将它们的向量拉近</p>
+</blockquote>
+<p><img src="/newstack/p/transformer%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0/img/%E5%A4%9A%E7%BB%B4%E5%8F%AF%E8%A7%86%E5%8C%96.png"
+	width="1017"
+	height="659"
+	srcset="/newstack/p/transformer%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0/img/%E5%A4%9A%E7%BB%B4%E5%8F%AF%E8%A7%86%E5%8C%96_hu9532837030348641932.png 480w, /newstack/p/transformer%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0/img/%E5%A4%9A%E7%BB%B4%E5%8F%AF%E8%A7%86%E5%8C%96_hu2896082699123433045.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="154"
+		data-flex-basis="370px"
+	
+></p>
+<p>向量方向相近，点积为正</p>
+<h2 id="起点第二步位置编码">起点第二步——位置编码
+</h2><p>🔹位置编码矩阵 PE</p>
+<p><strong>位置编码矩阵 PE</strong> 不是 $V \times d$，这是 <strong>Embedding 参数矩阵</strong>，也就是“总表”。但是输入不是所有表里的数，而是：
+</p>
+$$
+PE \in \mathbb{R}^{n \times d}
+$$
+<p>
+其中：</p>
+<ul>
+<li>$n$：当前输入序列长度，也就是这句话/这段文本里有多少个 token</li>
+<li>$d$：每个 token 向量的维度，必须和 embedding 的 $d$ 一样，才能相加</li>
+</ul>
+<p>embedding 只把 token 变成了向量，但它本身<strong>不知道 token 的顺序</strong>。也就是说，单看 embedding，模型只知道有哪些 token，不天然知道谁在前、谁在后。</p>
+<p>所以 Transformer 会在 embedding 向量上加入位置信息：
+</p>
+$$
+X = \text{Embedding} + \text{Positional Encoding}
+$$
+<p>
+原始 Transformer 用的是正弦/余弦编码：
+</p>
+$$
+PE_{pos,2i}=\sin\left(\frac{pos}{10000^{2i/d}}\right)
+$$
+$$
+PE_{pos,2i+1}=\cos\left(\frac{pos}{10000^{2i/d}}\right)
+$$
+<p>其中：</p>
+<ul>
+<li>$pos$：token 在序列中的位置，比如第 0 个、第 1 个、第 2 个（列）</li>
+<li>$i$：向量维度的索引（行）</li>
+<li>$d$：embedding 维度</li>
+</ul>
+<p>也就是说，每个 token 的最终输入向量变成：
+</p>
+$$
+\text{token语义信息} + \text{位置信息}
+$$
+<h2 id="自注意力机制单头">⭐自注意力机制（单头）
+</h2><p>此时的输入：
+</p>
+$$
+X = X_{emb} + PE
+$$
+<p>
+此时 $X$ 已经包含了：<strong>token 的语义信息 + token 的位置信息</strong></p>
+<p><strong>⚠特别注意：<strong>Q，K，V不是人为定义的标签，而是这些矩阵在公式中的</strong>功能性解释</strong>。</p>
+<h3 id="-实现机制-1">🔹 实现机制
+</h3><p>接下来，模型会用这个 $X$ 生成三组矩阵：
+</p>
+$$
+Q = XW_Q
+$$
+$$
+K=XW_K
+$$
+$$
+V = XW_V
+$$
+<p>其中功能性解释：</p>
+<ul>
+<li>$Q$：Query，表示“我要找什么”</li>
+<li>$K$：Key，表示“我有什么特征可以被匹配”</li>
+<li>$V$：Value，表示“真正要被加权汇总的信息内容”</li>
+</ul>
+<p>它们的<strong>矩阵形状是人为设定的超参数决定的</strong>，比如：
+</p>
+$$
+W_Q \in \mathbb{R}^{d \times d_k}
+$$
+<p>
+其中：</p>
+<ul>
+<li>$d$：输入向量维度，是超参数</li>
+<li>$d_k$：Q/K 的投影维度，也是设计时确定的，要注意$$V$$不一样</li>
+<li>矩阵里的每一个数值：训练得到</li>
+</ul>
+$$X$$
+<p> 分别乘上三个可训练权重矩阵得到:
+</p>
+$$
+Q \in \mathbb{R}^{n \times d_k}
+$$
+$$
+K \in \mathbb{R}^{n \times d_k}
+$$
+$$
+V \in \mathbb{R}^{n \times d_v}
+$$
+<p>这一步的核心作用是：</p>
+<p><strong>把同一个输入 $X$ 投影到三个不同的表示空间，为后面计算注意力权重做准备。</strong></p>
+<h1 id="attentionqkv">然后进入注意力计算：
+$$
+Attention(Q,K,V)
+</h1><p>softmax\left(\frac{QK^T}{\sqrt{d_k}}\right)V
+$$
+图解：</p>
+<p><img src="/newstack/p/transformer%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0/img/%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6.png"
+	width="672"
+	height="388"
+	srcset="/newstack/p/transformer%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0/img/%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6_hu10706857147711383271.png 480w, /newstack/p/transformer%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0/img/%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6_hu10349764174816869621.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="173"
+		data-flex-basis="415px"
+	
+></p>
+$$Y=Attention(Q,K,V) $$
+<p>是“融合上下文后的 token 表示”，每个 token 的新向量都包含了它根据注意力权重从其他 token 中提取到的信息。</p>
+<p>分析这个公式，首先是
+</p>
+$$
+QK^T
+$$
+<h3 id="q和k的意思也是人为理解的啊为了方便理解这么说但实际都是黑盒吧除了左乘和右乘的区别外没别的区别">Q和K的意思也是人为理解的啊，为了方便理解这么说但实际都是黑盒吧，除了左乘和右乘的区别外没别的区别
+</h3><p>**实际：**就是左乘和右乘的区别决定了他们的功能性解释</p>
+<p>更准确地说：
+</p>
+$$
+(QK^T)_{ij}=q_i\cdot k_j
+$$
+<p>
+这里的结构规定了：<strong>第 $i$ 个 token</strong> <strong>的</strong> $q_i$ 会和<strong>所有 token 的</strong> $k_j$ 做匹配，<strong>得到第 $i$ 行注意力分数</strong>。随后 softmax 按行归一化，所以第 $i$ 行表示“第 $i$ 个 token 对所有 token 的关注分布”。</p>
+<p>每个token<strong>的 Q 向量</strong>对其余所有token的<strong>K 向量</strong>(特征)去做匹配**(内积)**</p>
+<p>由这个公式引出以下问题：</p>
+<h3 id="1-q的功能性解释怎么理解">1. Q的功能性解释怎么理解
+</h3><p>Q 就是当前 token 用来和别人比较的那套特征。通过训练，模型学会了把当前 token 转换成什么样的 $Q$，才能更好地和其他 token 的 $K$ 进行相关性匹配，所以它被称为 Query。</p>
+<h3 id="2-k的功能性解释怎么理解">2. K的功能性解释怎么理解
+</h3><p>K 是每个 token 提供给别人匹配用的特征表示。</p>
+<h3 id="3-v的功能性解释怎么理解">3. V的功能性解释怎么理解
+</h3><p>前面 Q 和 K 只是用来算“相关性/权重”：
+</p>
+$$
+A=softmax\left(\frac{QK^T}{\sqrt{d_k}}\right)
+$$
+<p>
+这里得到的 $A$ 是注意力权重，表示：</p>
+<blockquote>
+<p>每个 token 应该关注哪些 token，以及关注多少。</p>
+</blockquote>
+<p>但注意：
+<strong>Q 和 K 算完权重以后，并不直接作为输出内容。</strong></p>
+<p>真正被加权求和的是 V：
+</p>
+$$
+Attention(Q,K,V)=AV
+$$
+<p>
+也就是：
+</p>
+$$
+Y_i=\sum_{j=1}^{n}A_{ij}v_j
+$$
+<p>
+这个公式的意思是：</p>
+<blockquote>
+<p>第 $i$ 个 token 的新表示$Y_i$，是根据注意力权重 $A_{ij}$，从所有 token 的 $V$ 向量中加权汇总出来的。</p>
+</blockquote>
+<p>所以 V 的作用就是：<strong>被注意力权重选中后，真正贡献给输出的内容。</strong></p>
+<h3 id="为什么叫自注意力机制和注意力机制的区别">为什么叫自注意力机制，和注意力机制的区别？
+</h3><p>关键在这个“自”字：它是在<strong>序列内部自己和自己做匹配</strong></p>
+<blockquote>
+<p><strong>Q、K、V 都来自同一个输入序列 $X$。</strong></p>
+</blockquote>
+<p>也就是：
+</p>
+$$
+Q=XW_Q,\quad K=XW_K,\quad V=XW_V
+$$
+<p>
+所以它是在<strong>序列内部自己和自己做匹配</strong>：
+每个 token 都拿自己的 $Q$，去和同一句话/同一段输入里所有 token 的 $K$ 匹配，然后再融合这些 token 的 $V$。</p>
+<p>因此叫：</p>
+<blockquote>
+<p><strong>Self-Attention = 输入序列内部的 token 之间互相注意。</strong></p>
+</blockquote>
+<hr>
+<p>普通“注意力机制”是一个更大的概念，不一定 Q/K/V 都来自同一个序列。没学过其他的注意力机制，暂时不写。</p>
+<h2 id="多自注意力机制">⭐⭐⭐多自注意力机制
+</h2><p>单头注意力可以理解为：<strong>模型用一套 Q/K/V 匹配方式，计算 token 之间的关系，并融合信息。</strong></p>
+<p>但是一套匹配方式可能不够。不同 token 之间可能存在多种关系，比如局部关系、远距离关系、语义关系、时序变化关系等。所以 Transformer 不只做一次 attention，而是并行做多次 attention。</p>
+<p>所以要把Q/K/V 矩阵细分成多个权重矩阵去各自训练。</p>
+<h3 id="多头注意力的核心思想">多头注意力的核心思想
+</h3><p>多头注意力就是：</p>
+<blockquote>
+<p>用多组不同的 $W_Q, W_K, W_V$，把同一个输入 $X$ 投影到多个不同子空间中，分别计算注意力。</p>
+</blockquote>
+$$
+d_k = d_v = \frac{d}{h}
+$$
+<p>第 $r$ 个 head 可以写成：
+</p>
+$$
+Q_r=XW_Q^{(r)}
+$$
+<p>
+然后：
+</p>
+$$
+head_r=Attention(Q_r,K_r,V_r)
+$$
+<p>
+每个 head 都会得到一个自己的注意力输出。</p>
+<h3 id="为什么要多个-head">为什么要多个 head？
+</h3><p>因为每个 head 的参数不同，所以它们可以学到不同的匹配方式。</p>
+<p>比如在文本里：</p>
+<p>一个 head 可能更关注主谓关系，另一个 head 可能更关注上下文呼应，还有一个 head 可能更关注局部相邻词。</p>
+<p>如果放到毕设那种时序/特征建模场景里，可以理解为：</p>
+<p>一个 head 可能关注局部退化特征，另一个 head 可能关注长期趋势，还有一个 head 可能关注某些关键时间片段。</p>
+<p><strong>注意：这不是人为规定的，而是训练中学出来的。</strong></p>
+<h3 id="多个-head-怎么合并">多个 head 怎么合并？
+</h3><p>假设有 $h$ 个 head：
+</p>
+$$
+head_1, head_2, \dots, head_h
+$$
+<p>
+先拼接：
+</p>
+$$
+Concat(head_1,head_2,\dots,head_h)
+$$
+<p>
+然后再乘一个输出权重矩阵：
+</p>
+$$
+MultiHead(X)=Concat(head_1,\dots,head_h)W_O
+$$
+<p>
+这里的 <strong>$W_O$ 也是训练出来的参数</strong>。</p>
+<p>它的作用是：<strong>把多个 head 学到的信息重新融合，变回统一的输出表示。</strong></p>
+<h3 id="总结">总结：
+</h3><p>​	使用多套 Q/K/V，让模型从<strong>多个子空间、多个角度学习 token 之间的关系</strong>，最后再把多个 head 的结果拼接并线性融合。</p>
+<h2 id="addnorm">⭐Add&amp;Norm
+</h2><p>Transformer 不会直接把 $Y$ 丢给下一层，而是做一步：
+</p>
+$$
+Y’ = LayerNorm(X + Y)
+$$
+<p>
+这里有两个操作：</p>
+<p><strong>残差连接（Add）</strong>：把原始输入 $X$ 加回去。
+</p>
+$$
+X + Y
+$$
+<p>
+使模型在融合注意力信息时，不完全丢掉原始输入，避免信息在多层网络中被破坏，也让深层网络更容易训练。</p>
+<p><strong>层归一化（Norm）</strong>：对加完后的结果做归一化，让数值分布更稳定。
+</p>
+$$
+LayerNorm(X + Z)
+$$
+<p>
+它的作用是让训练更稳定，避免每一层输出的数值范围变化太大。</p>
+<p><strong>多头注意力负责融合上下文信息，Add &amp; Norm 负责保留原始信息并稳定训练。</strong></p>
+<h2 id="-ffn">⭐ FFN
+</h2><p>前面多头注意力已经完成了：
+</p>
+$$
+X \rightarrow MultiHeadAttention \rightarrow Add\&Norm
+$$
+<p>
+得到一个融合了上下文信息的新表示。接下来，Transformer 会对每个 token 的向量再<strong>单独</strong>做一次非线性变换，这一步就是 FFN。</p>
+<p>它的典型形式是：
+</p>
+$$
+FFN(x)=W_2\sigma(W_1x+b_1)+b_2
+$$
+<p>
+这里：</p>
+<ul>
+<li>$W_1, W_2$：可训练权重</li>
+<li>$\sigma$：激活函数，原论文用 ReLU，后来很多模型用 GELU</li>
+<li>$x$：某个 token 的向量表示</li>
+</ul>
+<p>作用：Attention 负责让 token 之间交换信息，FFN 负责<strong>对每个 token 自己</strong>的特征进行进一步加工和提炼。</p>
+<p>​	FFN 是逐 token 独立处理的，不会让不同 token 之间直接交互。不同 token 之间的信息交互已经在前面的 self-attention 里完成了。</p>
+<p>后面还会再接一次 Add &amp; Norm：</p>
+<p>此后一个完整的 <strong>Transformer Encoder Block</strong> 可以写成：
+</p>
+$$
+Y = LayerNorm(X + MultiHeadAttention(X))
+$$
+$$
+Output = LayerNorm(Y + FFN(Y))
+$$
+<h2 id="encoder-堆叠">⭐Encoder 堆叠
+</h2><p>把“多头注意力 + FFN + 两次 Add&amp;Norm”作为一个<strong>编码器块</strong>，重复多层，得到更高层的上下文特征表示。</p>
+<p>这只是<strong>一层编码器块</strong>。真正的 Transformer Encoder 通常会把这个结构重复堆叠 $N$ 次：
+</p>
+$$
+X \rightarrow EncoderBlock_1 \rightarrow EncoderBlock_2 \rightarrow \cdots \rightarrow EncoderBlock_N
+$$
+<p>
+原始 Transformer 里 $N=6$，BERT-base 里 $N=12$，但具体层数也是人为设定的超参数。</p>
+<p>最后 Encoder 的输出仍然是一个矩阵：
+</p>
+$$
+H \in \mathbb{R}^{n \times d}
+$$
+<p>
+其中每一行仍然对应一个 token/时间步/特征位置，只不过它已经不是最初的 embedding，<strong>而是经过多层注意力和 FFN 加工后的上下文特征表示</strong>。</p>
+<h2 id="那transformer并行计算的特点怎么展现的">那transformer并行计算的特点怎么展现的？
+</h2><p><strong>不需要像 RNN/LSTM 那样按时间步递推</strong>。</p>
+<p>它不是先算第 1 个时间步，再算第 2 个时间步，而是直接通过矩阵乘法同时计算所有时间步之间的关系。</p>
+<p>所以 Transformer 的并行性体现在：
+</p>
+$$
+\text{一次矩阵运算} \Rightarrow \text{同时得到所有时间步之间的注意力关系}
+$$
+<h2 id="问题">问题
+</h2><p>为什么有残差连接这条路？
+残差连接——输入+归一化</p>
+<p>相当于把输入加上模型训练后的输出，再归一化。
+这样不管第一个模块训练的怎么样，后面还是能把原始的输入信息继续往下带。
+归一化让数值更趋于稳定，方便训练</p>
+<p>FNN——前馈神经网络   全连接层
+利用激活函数增强模型的非线性表达能力，引入更多参数给它去训练</p>
+<p>译码器部分，加mask，不能让他看到答案</p>
+<p>Q——query（询问；疑问 发问）    K———Key     V——Value</p>
+<p>自注意力机制————他的Q，K，V都来自于自身</p>
+<p>K，V来自编码器，Q来自输出的输入（告诉我我该关注谁（i love））</p>
+<p>最后的线性层预测词的得分，softmax最后将得分映射成概率——得到最终的词</p>
+<p>并行计算的重大突破，把输入输出同时拉进去训练，而不是把输入得到的输出与真实输入做对比，反馈后再重新输入，这样只有输入才参与了训练</p>
+<p>长序列问题————不管有多长，都可以把上下文信息编码进去</p>
+<p>用Q/K/V不相同可以保证在不同空间进行投影，增强了表达能力，提高了泛化能力。
+错误：：并不是说特定名字做特定的事情</p>
+<p>注意力核心公式：
+</p>
+$$
+\text{Attention}(Q,K,V)=\text{softmax}\left(\frac{QK^T}{\sqrt{d}}\right)V
+$$
+<p>
+🔹 Query（Q）
+表示“我在找什么”
+当前token的“查询意图”
+🔹 Key（K）
+表示“我有什么特征可以被匹配”
+所有token的“索引标签”
+🔹 Value（V）
+表示“真正要被加权输出的内容”</p>
+<p>Q/K → <strong>只参与“权重计算”</strong></p>
+<p>V → <strong>承载“信息本体”</strong></p>
+$$
+{QK^T}
+$$
+<p>
+是nxn</p>
+<p>Q,k：nx1&ndash;&gt; nx1  x  1xn =nxn</p>
+<p>所以得到的是各各意图与标签相乘的权重？概率？</p>
+<blockquote>
+<h2 id="qkᵀ-的真实含义核心">QKᵀ 的真实含义（核心）
+</h2>$$
+> (QK^T)_{ij} = q_i \cdot k_j
+> $$
+<p>👉 解释：第 $i$ 个“意图”（Query）和第 $j$ 个“标签”（Key）的匹配分数</p>
+</blockquote>
+<p>深度学习的本质就是带可调参数的矩阵乘法</p>
+<h3 id="softmax的t">softmax的T
+</h3><p>softmax的T（温度）越大，选择概率越小的，语言模型更具备创造性，但因此会失去严谨性。反之则失去创造性。</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/newstack/p/cnn%E7%90%86%E8%A7%A3/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">CNN理解</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/newstack/p/pytorch%E5%AD%A6%E4%B9%A0/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Pytorch学习</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/newstack/p/%E6%BB%9A%E5%8A%A8%E8%BD%B4%E6%89%BF%E6%95%B0%E6%8D%AE%E9%9B%86%E5%AD%A6%E4%B9%A0/">
+        
+        
+            <div class="article-image">
+                <img src="/newstack/p/%E6%BB%9A%E5%8A%A8%E8%BD%B4%E6%89%BF%E6%95%B0%E6%8D%AE%E9%9B%86%E5%AD%A6%E4%B9%A0/img/%E8%AF%84%E5%88%86%E5%87%BD%E6%95%B0%E7%9A%84%E5%9B%BE.a0e6c843855f0136d4c25111353b94e5_hu9181532278757597810.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 滚动轴承数据集学习"
+                        
+                        data-hash="md5-oObIQ4VfATbUwlERNTuU5Q==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">滚动轴承数据集学习</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/newstack/p/%E5%A6%82%E4%BD%95%E9%98%85%E8%AF%BB%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%9B%B8%E5%85%B3%E6%96%87%E7%8C%AE/">
+        
+        
+            <div class="article-image">
+                <img src="/newstack/p/%E5%A6%82%E4%BD%95%E9%98%85%E8%AF%BB%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%9B%B8%E5%85%B3%E6%96%87%E7%8C%AE/1.3da498b3264154d0779053ab4d709454_hu14704500923193509174.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 如何阅读深度学习相关文献"
+                        
+                        data-hash="md5-PaSYsyZBVNB3kFOrTXCUVA==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">如何阅读深度学习相关文献</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2025 - 
+        
+        2026 gogopaopao
+    </section>
+    
+    <section class="powerby">
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.26.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/newstack/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

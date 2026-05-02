@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>gogopaopao</copyright>
-        <lastBuildDate>Sat, 25 Apr 2026 01:55:48 +0800</lastBuildDate><atom:link href="https://gogopaopao.github.io/newstack/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 03 May 2026 00:16:53 +0800</lastBuildDate><atom:link href="https://gogopaopao.github.io/newstack/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>HUGO博客维护指令速查</title>
         <link>https://gogopaopao.github.io/newstack/p/hugo%E5%8D%9A%E5%AE%A2%E7%BB%B4%E6%8A%A4%E6%8C%87%E4%BB%A4%E9%80%9F%E6%9F%A5/</link>
         <pubDate>Tue, 03 Mar 2026 00:41:24 +0800</pubDate>
@@ -605,12 +605,617 @@
 </description>
         </item>
         <item>
-        <title>RCC STM32时钟配置</title>
-        <link>https://gogopaopao.github.io/newstack/p/rcc-stm32%E6%97%B6%E9%92%9F%E9%85%8D%E7%BD%AE/</link>
+        <title>Word表格怎么外框加粗内框正常</title>
+        <link>https://gogopaopao.github.io/newstack/p/word%E8%A1%A8%E6%A0%BC%E6%80%8E%E4%B9%88%E5%A4%96%E6%A1%86%E5%8A%A0%E7%B2%97%E5%86%85%E6%A1%86%E6%AD%A3%E5%B8%B8/</link>
+        <pubDate>Sun, 03 May 2026 00:16:53 +0800</pubDate>
+        
+        <guid>https://gogopaopao.github.io/newstack/p/word%E8%A1%A8%E6%A0%BC%E6%80%8E%E4%B9%88%E5%A4%96%E6%A1%86%E5%8A%A0%E7%B2%97%E5%86%85%E6%A1%86%E6%AD%A3%E5%B8%B8/</guid>
+        <description>&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/520397744&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;怎样将word表格外框加粗 - 知乎&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/qq_33300585/article/details/129207032&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;word中更改表格的边框粗细_word表格边框变粗怎么变回-CSDN博客&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://gogopaopao.github.io/newstack/newstack/p/word%E8%A1%A8%E6%A0%BC%E6%80%8E%E4%B9%88%E5%A4%96%E6%A1%86%E5%8A%A0%E7%B2%97%E5%86%85%E6%A1%86%E6%AD%A3%E5%B8%B8/2.png&#34;
+	width=&#34;715&#34;
+	height=&#34;607&#34;
+	srcset=&#34;https://gogopaopao.github.io/newstack/newstack/p/word%E8%A1%A8%E6%A0%BC%E6%80%8E%E4%B9%88%E5%A4%96%E6%A1%86%E5%8A%A0%E7%B2%97%E5%86%85%E6%A1%86%E6%AD%A3%E5%B8%B8/2_hu6418437707420063689.png 480w, https://gogopaopao.github.io/newstack/newstack/p/word%E8%A1%A8%E6%A0%BC%E6%80%8E%E4%B9%88%E5%A4%96%E6%A1%86%E5%8A%A0%E7%B2%97%E5%86%85%E6%A1%86%E6%AD%A3%E5%B8%B8/2_hu15582148786800240262.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;117&#34;
+		data-flex-basis=&#34;282px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;​	右键表格打开表格属性，在这个界面的时候，先选择左边的宽度，再选择对应的表格位置。&lt;/p&gt;
+&lt;p&gt;​	可以对应表格位置选择对应的不同宽度。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>CNN理解</title>
+        <link>https://gogopaopao.github.io/newstack/p/cnn%E7%90%86%E8%A7%A3/</link>
+        <pubDate>Sat, 02 May 2026 00:47:06 +0800</pubDate>
+        
+        <guid>https://gogopaopao.github.io/newstack/p/cnn%E7%90%86%E8%A7%A3/</guid>
+        <description>&lt;h2 id=&#34;卷积神经网络cnn&#34;&gt;卷积神经网络(CNN)
+&lt;/h2&gt;&lt;p&gt;​	CNN 通常由多组“卷积层 + 激活函数 + 池化层”堆叠而成，用于逐层提取由低级到高级的特征。全连接层通常在 &lt;strong&gt;CNN 的末端&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;一卷积层提取局部特征&#34;&gt;一、卷积层——提取局部特征
+&lt;/h3&gt;&lt;p&gt;​	卷积层通过卷积核在输入数据上滑动，提取局部区域的特征。&lt;strong&gt;步幅&lt;/strong&gt;决定卷积核每次移动的距离：步幅越小，特征提取越密集，保留的空间信息越多；步幅越大，输出特征图尺寸越小，计算量也会降低。&lt;/p&gt;
+&lt;h3 id=&#34;二池化层标重点减冗余&#34;&gt;二、池化层——标重点、减冗余
+&lt;/h3&gt;&lt;p&gt;​	池化层用于对特征图进行下采样，压缩特征图尺寸，减少冗余信息和计算量。常见的最大池化会保留局部区域中响应最强的特征，从而突出主要特征，并在一定程度上增强模型对位置变化的鲁棒性。&lt;/p&gt;
+&lt;p&gt;下采样，剔除重复、不重要的特征&lt;/p&gt;
+&lt;p&gt;如果是二维卷积识图的话，要展平成一维作为连接层的输入&lt;/p&gt;
+&lt;h3 id=&#34;三全连接层整合线索计算概率分布&#34;&gt;三、全连接层——整合线索，计算概率分布
+&lt;/h3&gt;&lt;p&gt;​	在传统 CNN 中，卷积和池化得到的二维特征图通常会被展平成一维向量，再输入全连接层。全连接层用于综合前面提取到的特征，并输出分类概率或预测结果。&lt;/p&gt;
+&lt;p&gt;​	不过在一些现代 CNN 结构中，也可以使用全局平均池化等方式代替直接展平，以减少参数量。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Transformer架构学习</title>
+        <link>https://gogopaopao.github.io/newstack/p/transformer%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0/</link>
+        <pubDate>Fri, 01 May 2026 01:35:24 +0800</pubDate>
+        
+        <guid>https://gogopaopao.github.io/newstack/p/transformer%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0/</guid>
+        <description>&lt;p&gt;Transformer架构学习，基于动画教程理解和GPT问答，我的毕设只涉及了他的多头自注意力机制，所以本文没有涉及译码器部分。&lt;/p&gt;
+&lt;h2 id=&#34;总结构图&#34;&gt;总结构图
+&lt;/h2&gt;&lt;p&gt;&lt;img src=&#34;https://gogopaopao.github.io/newstack/newstack/p/transformer%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0/img/%E6%80%BB%E7%BB%93%E6%9E%84%E5%9B%BE.png&#34;
+	width=&#34;554&#34;
+	height=&#34;705&#34;
+	srcset=&#34;https://gogopaopao.github.io/newstack/newstack/p/transformer%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0/img/%E6%80%BB%E7%BB%93%E6%9E%84%E5%9B%BE_hu15087269705544587442.png 480w, https://gogopaopao.github.io/newstack/newstack/p/transformer%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0/img/%E6%80%BB%E7%BB%93%E6%9E%84%E5%9B%BE_hu3045176903240678899.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;78&#34;
+		data-flex-basis=&#34;188px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;一个完整的 Encoder Block 的内部结构：
+&lt;/p&gt;
+$$
+X \rightarrow MultiHeadAttention \rightarrow Add\&amp;Norm \rightarrow FFN \rightarrow Add\&amp;Norm
+$$
+&lt;h2 id=&#34;transformer-流程起点词嵌入embedding&#34;&gt;Transformer 流程起点——词嵌入Embedding
+&lt;/h2&gt;&lt;p&gt;输入的 token 首先经过 embedding 层，将离散的 token 映射为连续向量，用于编码语义信息。每个 token 对应 embedding 矩阵的一行，形成一个 $d$ 维向量，也就是一组数字：
+&lt;/p&gt;
+$$
+x_i \in \mathbb{R}^d
+$$
+&lt;p&gt;
+这些向量作为模型后续计算（如 Attention）的基础输入。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;-embedding-矩阵&#34;&gt;🔹 Embedding 矩阵
+&lt;/h3&gt;&lt;p&gt;Embedding 矩阵记作：
+&lt;/p&gt;
+$$
+W_e \in \mathbb{R}^{V \times d}
+$$
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;V&lt;/strong&gt;：词表大小（行数，由人为设定的超参数）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;d&lt;/strong&gt;：向量维度（列数，由人为设定的超参数）&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;​	矩阵的每一行对应一个 token 的向量表示，初始值随机生成，不是人为编码，而是&lt;strong&gt;模型的第一层权重&lt;/strong&gt;。在训练过程中，embedding 会通过梯度优化不断更新，使得语义相似的 token 在向量空间中距离更接近。&lt;/p&gt;
+&lt;p&gt;常见 d 值：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;小模型：128 / 256&lt;/li&gt;
+&lt;li&gt;中等模型：512 / 768&lt;/li&gt;
+&lt;li&gt;GPT-3：12288&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;维度 d 决定 token 的表示能力，同时影响参数量 $V \times d$ 和计算成本。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;-实现机制&#34;&gt;🔹 实现机制
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;输入不是&lt;/strong&gt;整个 Embedding 矩阵 $W_e$，而是当前 token ids 从 $W_e$ 中查表得到的 embedding 向量序列。&lt;/p&gt;
+&lt;p&gt;Embedding 实质上是查表（lookup）操作：
+&lt;/p&gt;
+$$
+ x_i = W_e[\text{id}_i]
+$$
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;每个 token 的 id 用来索引 &lt;strong&gt;embedding 矩阵&lt;/strong&gt;的一行&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;得到对应的向量表示&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;这意味着 embedding 不是预处理，而是模型可训练的一部分，通过训练学习语义表示&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;说是要把token对应成向量，通过查表来，表怎么来的？表就是 &lt;strong&gt;embedding 矩阵&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;查表操作本质上等价于 one-hot 向量与 embedding 矩阵相乘：
+&lt;/p&gt;
+$$
+   X_{emb}=OW_e
+   $$
+&lt;p&gt;
+实际实现中不会真的构造 one-hot 矩阵，而是直接用 token id 索引 $W_e$ 的对应行。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;-类比理解&#34;&gt;🔹 类比理解
+&lt;/h3&gt;&lt;p&gt;可以把 embedding 理解为：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;加密&lt;/strong&gt;：将 token 编码成向量信号，在模型内部进行处理&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;解码（unembedding）&lt;/strong&gt;：通过输出层将向量映射回词表概率，实现 token 的预测&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;-总结&#34;&gt;🔹 总结
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;Embedding 层通过查表将每个 token 映射为一个 d 维向量，矩阵维度由超参数 V 和 d 决定，向量初始随机，在训练过程中学习语义表示，是 Transformer 输入处理的第一步核心参数。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://gogopaopao.github.io/newstack/newstack/p/transformer%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0/img/%E8%AF%8D%E5%B5%8C%E5%85%A5%E7%BC%96%E7%A0%81.png&#34;
+	width=&#34;935&#34;
+	height=&#34;599&#34;
+	srcset=&#34;https://gogopaopao.github.io/newstack/newstack/p/transformer%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0/img/%E8%AF%8D%E5%B5%8C%E5%85%A5%E7%BC%96%E7%A0%81_hu9315073052108600837.png 480w, https://gogopaopao.github.io/newstack/newstack/p/transformer%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0/img/%E8%AF%8D%E5%B5%8C%E5%85%A5%E7%BC%96%E7%A0%81_hu17839999877814086047.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;156&#34;
+		data-flex-basis=&#34;374px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;数据可视化之后就是，越相近的两个词，位置越接近。&lt;/p&gt;
+&lt;p&gt;👉&lt;strong&gt;语义相似的词，在向量空间中距离更近&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;⚠ 但注意：这不是人为编码的，属于权重，是训练过程中自动学习得到的&lt;/p&gt;
+&lt;p&gt;原因：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;相似词出现在相似上下文中，模型为了降低预测误差，会将它们的向量拉近&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;https://gogopaopao.github.io/newstack/newstack/p/transformer%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0/img/%E5%A4%9A%E7%BB%B4%E5%8F%AF%E8%A7%86%E5%8C%96.png&#34;
+	width=&#34;1017&#34;
+	height=&#34;659&#34;
+	srcset=&#34;https://gogopaopao.github.io/newstack/newstack/p/transformer%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0/img/%E5%A4%9A%E7%BB%B4%E5%8F%AF%E8%A7%86%E5%8C%96_hu9532837030348641932.png 480w, https://gogopaopao.github.io/newstack/newstack/p/transformer%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0/img/%E5%A4%9A%E7%BB%B4%E5%8F%AF%E8%A7%86%E5%8C%96_hu2896082699123433045.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;154&#34;
+		data-flex-basis=&#34;370px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;向量方向相近，点积为正&lt;/p&gt;
+&lt;h2 id=&#34;起点第二步位置编码&#34;&gt;起点第二步——位置编码
+&lt;/h2&gt;&lt;p&gt;🔹位置编码矩阵 PE&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;位置编码矩阵 PE&lt;/strong&gt; 不是 $V \times d$，这是 &lt;strong&gt;Embedding 参数矩阵&lt;/strong&gt;，也就是“总表”。但是输入不是所有表里的数，而是：
+&lt;/p&gt;
+$$
+PE \in \mathbb{R}^{n \times d}
+$$
+&lt;p&gt;
+其中：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$n$：当前输入序列长度，也就是这句话/这段文本里有多少个 token&lt;/li&gt;
+&lt;li&gt;$d$：每个 token 向量的维度，必须和 embedding 的 $d$ 一样，才能相加&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;embedding 只把 token 变成了向量，但它本身&lt;strong&gt;不知道 token 的顺序&lt;/strong&gt;。也就是说，单看 embedding，模型只知道有哪些 token，不天然知道谁在前、谁在后。&lt;/p&gt;
+&lt;p&gt;所以 Transformer 会在 embedding 向量上加入位置信息：
+&lt;/p&gt;
+$$
+X = \text{Embedding} + \text{Positional Encoding}
+$$
+&lt;p&gt;
+原始 Transformer 用的是正弦/余弦编码：
+&lt;/p&gt;
+$$
+PE_{pos,2i}=\sin\left(\frac{pos}{10000^{2i/d}}\right)
+$$
+$$
+PE_{pos,2i+1}=\cos\left(\frac{pos}{10000^{2i/d}}\right)
+$$
+&lt;p&gt;其中：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$pos$：token 在序列中的位置，比如第 0 个、第 1 个、第 2 个（列）&lt;/li&gt;
+&lt;li&gt;$i$：向量维度的索引（行）&lt;/li&gt;
+&lt;li&gt;$d$：embedding 维度&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;也就是说，每个 token 的最终输入向量变成：
+&lt;/p&gt;
+$$
+\text{token语义信息} + \text{位置信息}
+$$
+&lt;h2 id=&#34;自注意力机制单头&#34;&gt;⭐自注意力机制（单头）
+&lt;/h2&gt;&lt;p&gt;此时的输入：
+&lt;/p&gt;
+$$
+X = X_{emb} + PE
+$$
+&lt;p&gt;
+此时 $X$ 已经包含了：&lt;strong&gt;token 的语义信息 + token 的位置信息&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;⚠特别注意：&lt;strong&gt;Q，K，V不是人为定义的标签，而是这些矩阵在公式中的&lt;/strong&gt;功能性解释&lt;/strong&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;-实现机制-1&#34;&gt;🔹 实现机制
+&lt;/h3&gt;&lt;p&gt;接下来，模型会用这个 $X$ 生成三组矩阵：
+&lt;/p&gt;
+$$
+Q = XW_Q
+$$
+$$
+K=XW_K
+$$
+$$
+V = XW_V
+$$
+&lt;p&gt;其中功能性解释：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$Q$：Query，表示“我要找什么”&lt;/li&gt;
+&lt;li&gt;$K$：Key，表示“我有什么特征可以被匹配”&lt;/li&gt;
+&lt;li&gt;$V$：Value，表示“真正要被加权汇总的信息内容”&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;它们的&lt;strong&gt;矩阵形状是人为设定的超参数决定的&lt;/strong&gt;，比如：
+&lt;/p&gt;
+$$
+W_Q \in \mathbb{R}^{d \times d_k}
+$$
+&lt;p&gt;
+其中：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$d$：输入向量维度，是超参数&lt;/li&gt;
+&lt;li&gt;$d_k$：Q/K 的投影维度，也是设计时确定的，要注意$$V$$不一样&lt;/li&gt;
+&lt;li&gt;矩阵里的每一个数值：训练得到&lt;/li&gt;
+&lt;/ul&gt;
+$$X$$
+&lt;p&gt; 分别乘上三个可训练权重矩阵得到:
+&lt;/p&gt;
+$$
+Q \in \mathbb{R}^{n \times d_k}
+$$
+$$
+K \in \mathbb{R}^{n \times d_k}
+$$
+$$
+V \in \mathbb{R}^{n \times d_v}
+$$
+&lt;p&gt;这一步的核心作用是：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;把同一个输入 $X$ 投影到三个不同的表示空间，为后面计算注意力权重做准备。&lt;/strong&gt;&lt;/p&gt;
+&lt;h1 id=&#34;attentionqkv&#34;&gt;然后进入注意力计算：
+$$
+Attention(Q,K,V)
+&lt;/h1&gt;&lt;p&gt;softmax\left(\frac{QK^T}{\sqrt{d_k}}\right)V
+$$
+图解：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://gogopaopao.github.io/newstack/newstack/p/transformer%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0/img/%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6.png&#34;
+	width=&#34;672&#34;
+	height=&#34;388&#34;
+	srcset=&#34;https://gogopaopao.github.io/newstack/newstack/p/transformer%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0/img/%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6_hu10706857147711383271.png 480w, https://gogopaopao.github.io/newstack/newstack/p/transformer%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0/img/%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6_hu10349764174816869621.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;173&#34;
+		data-flex-basis=&#34;415px&#34;
+	
+&gt;&lt;/p&gt;
+$$Y=Attention(Q,K,V) $$
+&lt;p&gt;是“融合上下文后的 token 表示”，每个 token 的新向量都包含了它根据注意力权重从其他 token 中提取到的信息。&lt;/p&gt;
+&lt;p&gt;分析这个公式，首先是
+&lt;/p&gt;
+$$
+QK^T
+$$
+&lt;h3 id=&#34;q和k的意思也是人为理解的啊为了方便理解这么说但实际都是黑盒吧除了左乘和右乘的区别外没别的区别&#34;&gt;Q和K的意思也是人为理解的啊，为了方便理解这么说但实际都是黑盒吧，除了左乘和右乘的区别外没别的区别
+&lt;/h3&gt;&lt;p&gt;**实际：**就是左乘和右乘的区别决定了他们的功能性解释&lt;/p&gt;
+&lt;p&gt;更准确地说：
+&lt;/p&gt;
+$$
+(QK^T)_{ij}=q_i\cdot k_j
+$$
+&lt;p&gt;
+这里的结构规定了：&lt;strong&gt;第 $i$ 个 token&lt;/strong&gt; &lt;strong&gt;的&lt;/strong&gt; $q_i$ 会和&lt;strong&gt;所有 token 的&lt;/strong&gt; $k_j$ 做匹配，&lt;strong&gt;得到第 $i$ 行注意力分数&lt;/strong&gt;。随后 softmax 按行归一化，所以第 $i$ 行表示“第 $i$ 个 token 对所有 token 的关注分布”。&lt;/p&gt;
+&lt;p&gt;每个token&lt;strong&gt;的 Q 向量&lt;/strong&gt;对其余所有token的&lt;strong&gt;K 向量&lt;/strong&gt;(特征)去做匹配**(内积)**&lt;/p&gt;
+&lt;p&gt;由这个公式引出以下问题：&lt;/p&gt;
+&lt;h3 id=&#34;1-q的功能性解释怎么理解&#34;&gt;1. Q的功能性解释怎么理解
+&lt;/h3&gt;&lt;p&gt;Q 就是当前 token 用来和别人比较的那套特征。通过训练，模型学会了把当前 token 转换成什么样的 $Q$，才能更好地和其他 token 的 $K$ 进行相关性匹配，所以它被称为 Query。&lt;/p&gt;
+&lt;h3 id=&#34;2-k的功能性解释怎么理解&#34;&gt;2. K的功能性解释怎么理解
+&lt;/h3&gt;&lt;p&gt;K 是每个 token 提供给别人匹配用的特征表示。&lt;/p&gt;
+&lt;h3 id=&#34;3-v的功能性解释怎么理解&#34;&gt;3. V的功能性解释怎么理解
+&lt;/h3&gt;&lt;p&gt;前面 Q 和 K 只是用来算“相关性/权重”：
+&lt;/p&gt;
+$$
+A=softmax\left(\frac{QK^T}{\sqrt{d_k}}\right)
+$$
+&lt;p&gt;
+这里得到的 $A$ 是注意力权重，表示：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;每个 token 应该关注哪些 token，以及关注多少。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;但注意：
+&lt;strong&gt;Q 和 K 算完权重以后，并不直接作为输出内容。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;真正被加权求和的是 V：
+&lt;/p&gt;
+$$
+Attention(Q,K,V)=AV
+$$
+&lt;p&gt;
+也就是：
+&lt;/p&gt;
+$$
+Y_i=\sum_{j=1}^{n}A_{ij}v_j
+$$
+&lt;p&gt;
+这个公式的意思是：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;第 $i$ 个 token 的新表示$Y_i$，是根据注意力权重 $A_{ij}$，从所有 token 的 $V$ 向量中加权汇总出来的。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;所以 V 的作用就是：&lt;strong&gt;被注意力权重选中后，真正贡献给输出的内容。&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;为什么叫自注意力机制和注意力机制的区别&#34;&gt;为什么叫自注意力机制，和注意力机制的区别？
+&lt;/h3&gt;&lt;p&gt;关键在这个“自”字：它是在&lt;strong&gt;序列内部自己和自己做匹配&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Q、K、V 都来自同一个输入序列 $X$。&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;也就是：
+&lt;/p&gt;
+$$
+Q=XW_Q,\quad K=XW_K,\quad V=XW_V
+$$
+&lt;p&gt;
+所以它是在&lt;strong&gt;序列内部自己和自己做匹配&lt;/strong&gt;：
+每个 token 都拿自己的 $Q$，去和同一句话/同一段输入里所有 token 的 $K$ 匹配，然后再融合这些 token 的 $V$。&lt;/p&gt;
+&lt;p&gt;因此叫：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Self-Attention = 输入序列内部的 token 之间互相注意。&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;p&gt;普通“注意力机制”是一个更大的概念，不一定 Q/K/V 都来自同一个序列。没学过其他的注意力机制，暂时不写。&lt;/p&gt;
+&lt;h2 id=&#34;多自注意力机制&#34;&gt;⭐⭐⭐多自注意力机制
+&lt;/h2&gt;&lt;p&gt;单头注意力可以理解为：&lt;strong&gt;模型用一套 Q/K/V 匹配方式，计算 token 之间的关系，并融合信息。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;但是一套匹配方式可能不够。不同 token 之间可能存在多种关系，比如局部关系、远距离关系、语义关系、时序变化关系等。所以 Transformer 不只做一次 attention，而是并行做多次 attention。&lt;/p&gt;
+&lt;p&gt;所以要把Q/K/V 矩阵细分成多个权重矩阵去各自训练。&lt;/p&gt;
+&lt;h3 id=&#34;多头注意力的核心思想&#34;&gt;多头注意力的核心思想
+&lt;/h3&gt;&lt;p&gt;多头注意力就是：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;用多组不同的 $W_Q, W_K, W_V$，把同一个输入 $X$ 投影到多个不同子空间中，分别计算注意力。&lt;/p&gt;
+&lt;/blockquote&gt;
+$$
+d_k = d_v = \frac{d}{h}
+$$
+&lt;p&gt;第 $r$ 个 head 可以写成：
+&lt;/p&gt;
+$$
+Q_r=XW_Q^{(r)}
+$$
+&lt;p&gt;
+然后：
+&lt;/p&gt;
+$$
+head_r=Attention(Q_r,K_r,V_r)
+$$
+&lt;p&gt;
+每个 head 都会得到一个自己的注意力输出。&lt;/p&gt;
+&lt;h3 id=&#34;为什么要多个-head&#34;&gt;为什么要多个 head？
+&lt;/h3&gt;&lt;p&gt;因为每个 head 的参数不同，所以它们可以学到不同的匹配方式。&lt;/p&gt;
+&lt;p&gt;比如在文本里：&lt;/p&gt;
+&lt;p&gt;一个 head 可能更关注主谓关系，另一个 head 可能更关注上下文呼应，还有一个 head 可能更关注局部相邻词。&lt;/p&gt;
+&lt;p&gt;如果放到毕设那种时序/特征建模场景里，可以理解为：&lt;/p&gt;
+&lt;p&gt;一个 head 可能关注局部退化特征，另一个 head 可能关注长期趋势，还有一个 head 可能关注某些关键时间片段。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;注意：这不是人为规定的，而是训练中学出来的。&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;多个-head-怎么合并&#34;&gt;多个 head 怎么合并？
+&lt;/h3&gt;&lt;p&gt;假设有 $h$ 个 head：
+&lt;/p&gt;
+$$
+head_1, head_2, \dots, head_h
+$$
+&lt;p&gt;
+先拼接：
+&lt;/p&gt;
+$$
+Concat(head_1,head_2,\dots,head_h)
+$$
+&lt;p&gt;
+然后再乘一个输出权重矩阵：
+&lt;/p&gt;
+$$
+MultiHead(X)=Concat(head_1,\dots,head_h)W_O
+$$
+&lt;p&gt;
+这里的 &lt;strong&gt;$W_O$ 也是训练出来的参数&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;它的作用是：&lt;strong&gt;把多个 head 学到的信息重新融合，变回统一的输出表示。&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;总结&#34;&gt;总结：
+&lt;/h3&gt;&lt;p&gt;​	使用多套 Q/K/V，让模型从&lt;strong&gt;多个子空间、多个角度学习 token 之间的关系&lt;/strong&gt;，最后再把多个 head 的结果拼接并线性融合。&lt;/p&gt;
+&lt;h2 id=&#34;addnorm&#34;&gt;⭐Add&amp;amp;Norm
+&lt;/h2&gt;&lt;p&gt;Transformer 不会直接把 $Y$ 丢给下一层，而是做一步：
+&lt;/p&gt;
+$$
+Y’ = LayerNorm(X + Y)
+$$
+&lt;p&gt;
+这里有两个操作：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;残差连接（Add）&lt;/strong&gt;：把原始输入 $X$ 加回去。
+&lt;/p&gt;
+$$
+X + Y
+$$
+&lt;p&gt;
+使模型在融合注意力信息时，不完全丢掉原始输入，避免信息在多层网络中被破坏，也让深层网络更容易训练。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;层归一化（Norm）&lt;/strong&gt;：对加完后的结果做归一化，让数值分布更稳定。
+&lt;/p&gt;
+$$
+LayerNorm(X + Z)
+$$
+&lt;p&gt;
+它的作用是让训练更稳定，避免每一层输出的数值范围变化太大。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;多头注意力负责融合上下文信息，Add &amp;amp; Norm 负责保留原始信息并稳定训练。&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;-ffn&#34;&gt;⭐ FFN
+&lt;/h2&gt;&lt;p&gt;前面多头注意力已经完成了：
+&lt;/p&gt;
+$$
+X \rightarrow MultiHeadAttention \rightarrow Add\&amp;Norm
+$$
+&lt;p&gt;
+得到一个融合了上下文信息的新表示。接下来，Transformer 会对每个 token 的向量再&lt;strong&gt;单独&lt;/strong&gt;做一次非线性变换，这一步就是 FFN。&lt;/p&gt;
+&lt;p&gt;它的典型形式是：
+&lt;/p&gt;
+$$
+FFN(x)=W_2\sigma(W_1x+b_1)+b_2
+$$
+&lt;p&gt;
+这里：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$W_1, W_2$：可训练权重&lt;/li&gt;
+&lt;li&gt;$\sigma$：激活函数，原论文用 ReLU，后来很多模型用 GELU&lt;/li&gt;
+&lt;li&gt;$x$：某个 token 的向量表示&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;作用：Attention 负责让 token 之间交换信息，FFN 负责&lt;strong&gt;对每个 token 自己&lt;/strong&gt;的特征进行进一步加工和提炼。&lt;/p&gt;
+&lt;p&gt;​	FFN 是逐 token 独立处理的，不会让不同 token 之间直接交互。不同 token 之间的信息交互已经在前面的 self-attention 里完成了。&lt;/p&gt;
+&lt;p&gt;后面还会再接一次 Add &amp;amp; Norm：&lt;/p&gt;
+&lt;p&gt;此后一个完整的 &lt;strong&gt;Transformer Encoder Block&lt;/strong&gt; 可以写成：
+&lt;/p&gt;
+$$
+Y = LayerNorm(X + MultiHeadAttention(X))
+$$
+$$
+Output = LayerNorm(Y + FFN(Y))
+$$
+&lt;h2 id=&#34;encoder-堆叠&#34;&gt;⭐Encoder 堆叠
+&lt;/h2&gt;&lt;p&gt;把“多头注意力 + FFN + 两次 Add&amp;amp;Norm”作为一个&lt;strong&gt;编码器块&lt;/strong&gt;，重复多层，得到更高层的上下文特征表示。&lt;/p&gt;
+&lt;p&gt;这只是&lt;strong&gt;一层编码器块&lt;/strong&gt;。真正的 Transformer Encoder 通常会把这个结构重复堆叠 $N$ 次：
+&lt;/p&gt;
+$$
+X \rightarrow EncoderBlock_1 \rightarrow EncoderBlock_2 \rightarrow \cdots \rightarrow EncoderBlock_N
+$$
+&lt;p&gt;
+原始 Transformer 里 $N=6$，BERT-base 里 $N=12$，但具体层数也是人为设定的超参数。&lt;/p&gt;
+&lt;p&gt;最后 Encoder 的输出仍然是一个矩阵：
+&lt;/p&gt;
+$$
+H \in \mathbb{R}^{n \times d}
+$$
+&lt;p&gt;
+其中每一行仍然对应一个 token/时间步/特征位置，只不过它已经不是最初的 embedding，&lt;strong&gt;而是经过多层注意力和 FFN 加工后的上下文特征表示&lt;/strong&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;那transformer并行计算的特点怎么展现的&#34;&gt;那transformer并行计算的特点怎么展现的？
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;不需要像 RNN/LSTM 那样按时间步递推&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;它不是先算第 1 个时间步，再算第 2 个时间步，而是直接通过矩阵乘法同时计算所有时间步之间的关系。&lt;/p&gt;
+&lt;p&gt;所以 Transformer 的并行性体现在：
+&lt;/p&gt;
+$$
+\text{一次矩阵运算} \Rightarrow \text{同时得到所有时间步之间的注意力关系}
+$$
+&lt;h2 id=&#34;问题&#34;&gt;问题
+&lt;/h2&gt;&lt;p&gt;为什么有残差连接这条路？
+残差连接——输入+归一化&lt;/p&gt;
+&lt;p&gt;相当于把输入加上模型训练后的输出，再归一化。
+这样不管第一个模块训练的怎么样，后面还是能把原始的输入信息继续往下带。
+归一化让数值更趋于稳定，方便训练&lt;/p&gt;
+&lt;p&gt;FNN——前馈神经网络   全连接层
+利用激活函数增强模型的非线性表达能力，引入更多参数给它去训练&lt;/p&gt;
+&lt;p&gt;译码器部分，加mask，不能让他看到答案&lt;/p&gt;
+&lt;p&gt;Q——query（询问；疑问 发问）    K———Key     V——Value&lt;/p&gt;
+&lt;p&gt;自注意力机制————他的Q，K，V都来自于自身&lt;/p&gt;
+&lt;p&gt;K，V来自编码器，Q来自输出的输入（告诉我我该关注谁（i love））&lt;/p&gt;
+&lt;p&gt;最后的线性层预测词的得分，softmax最后将得分映射成概率——得到最终的词&lt;/p&gt;
+&lt;p&gt;并行计算的重大突破，把输入输出同时拉进去训练，而不是把输入得到的输出与真实输入做对比，反馈后再重新输入，这样只有输入才参与了训练&lt;/p&gt;
+&lt;p&gt;长序列问题————不管有多长，都可以把上下文信息编码进去&lt;/p&gt;
+&lt;p&gt;用Q/K/V不相同可以保证在不同空间进行投影，增强了表达能力，提高了泛化能力。
+错误：：并不是说特定名字做特定的事情&lt;/p&gt;
+&lt;p&gt;注意力核心公式：
+&lt;/p&gt;
+$$
+\text{Attention}(Q,K,V)=\text{softmax}\left(\frac{QK^T}{\sqrt{d}}\right)V
+$$
+&lt;p&gt;
+🔹 Query（Q）
+表示“我在找什么”
+当前token的“查询意图”
+🔹 Key（K）
+表示“我有什么特征可以被匹配”
+所有token的“索引标签”
+🔹 Value（V）
+表示“真正要被加权输出的内容”&lt;/p&gt;
+&lt;p&gt;Q/K → &lt;strong&gt;只参与“权重计算”&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;V → &lt;strong&gt;承载“信息本体”&lt;/strong&gt;&lt;/p&gt;
+$$
+{QK^T}
+$$
+&lt;p&gt;
+是nxn&lt;/p&gt;
+&lt;p&gt;Q,k：nx1&amp;ndash;&amp;gt; nx1  x  1xn =nxn&lt;/p&gt;
+&lt;p&gt;所以得到的是各各意图与标签相乘的权重？概率？&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;h2 id=&#34;qkᵀ-的真实含义核心&#34;&gt;QKᵀ 的真实含义（核心）
+&lt;/h2&gt;$$
+&gt; (QK^T)_{ij} = q_i \cdot k_j
+&gt; $$
+&lt;p&gt;👉 解释：第 $i$ 个“意图”（Query）和第 $j$ 个“标签”（Key）的匹配分数&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;深度学习的本质就是带可调参数的矩阵乘法&lt;/p&gt;
+&lt;h3 id=&#34;softmax的t&#34;&gt;softmax的T
+&lt;/h3&gt;&lt;p&gt;softmax的T（温度）越大，选择概率越小的，语言模型更具备创造性，但因此会失去严谨性。反之则失去创造性。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>重温傅里叶变换</title>
+        <link>https://gogopaopao.github.io/newstack/p/%E9%87%8D%E6%B8%A9%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/</link>
+        <pubDate>Thu, 30 Apr 2026 15:28:46 +0800</pubDate>
+        
+        <guid>https://gogopaopao.github.io/newstack/p/%E9%87%8D%E6%B8%A9%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/</guid>
+        <description>&lt;p&gt;任何时间函数都可分解为若干正弦信号总和——任意时域信号的基本组成单元&lt;/p&gt;
+&lt;p&gt;傅里叶：任何周期函数，都可以看作是不同&lt;strong&gt;振幅&lt;/strong&gt;，不同&lt;strong&gt;相位&lt;/strong&gt;正弦波的叠加。&lt;/p&gt;
+&lt;p&gt;随着叠加的递增，所有正弦波中上升的部分逐渐让原本缓慢增加的曲线不断变陡，而所有正弦波中下降的部分又抵消了上升到最高处时继续上升的部分使其变为水平线。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>PCB绘制须知</title>
+        <link>https://gogopaopao.github.io/newstack/p/pcb%E7%BB%98%E5%88%B6%E9%A1%BB%E7%9F%A5/</link>
+        <pubDate>Sat, 25 Apr 2026 23:31:59 +0800</pubDate>
+        
+        <guid>https://gogopaopao.github.io/newstack/p/pcb%E7%BB%98%E5%88%B6%E9%A1%BB%E7%9F%A5/</guid>
+        <description>&lt;p&gt;&lt;strong&gt;一般原则：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;信号线宽10~15mil。一般是11mil。&lt;/li&gt;
+&lt;li&gt;不能走锐角线，直角线也尽量不要。&lt;/li&gt;
+&lt;li&gt;对于细引脚来说，使用的线径最好在不超过引脚宽度的情况下尽可能宽。&lt;/li&gt;
+&lt;li&gt;过孔孔径一般可选12，24&lt;/li&gt;
+&lt;li&gt;双面板的两面导线尽量避免平行走线&lt;/li&gt;
+&lt;li&gt;信号线不要形成环路，如果必须有环路，那么越小越好&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;pcb快捷键&#34;&gt;PCB快捷键
+&lt;/h2&gt;&lt;p&gt;W：绘制走线	V：放置过孔
+T：上层		B: 下层&lt;/p&gt;
+&lt;h3 id=&#34;走线与绘制&#34;&gt;走线与绘制：
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;W：绘制走线&lt;/strong&gt;
+U/C：绘制圆弧/圆形
+N/S/O：放置尺寸、文本、连接线
+E：绘制铺铜&lt;/p&gt;
+&lt;h3 id=&#34;层切换与元件操作&#34;&gt;层切换与元件操作：
+&lt;/h3&gt;&lt;p&gt;T：切换至顶层/底层（选中封装时调整层属性）
+数字键 1-4：切换至内层1～4
+P：放置焊盘
+Q：切换画布单位
+&lt;strong&gt;V：放置过孔&lt;/strong&gt;
+M：量测距离
+H：高亮当前网络（连续按可切换高亮状态）
+L：改变布线角度&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>RCC——STM32时钟树</title>
+        <link>https://gogopaopao.github.io/newstack/p/rccstm32%E6%97%B6%E9%92%9F%E6%A0%91/</link>
         <pubDate>Sat, 25 Apr 2026 01:55:48 +0800</pubDate>
         
-        <guid>https://gogopaopao.github.io/newstack/p/rcc-stm32%E6%97%B6%E9%92%9F%E9%85%8D%E7%BD%AE/</guid>
-        <description></description>
+        <guid>https://gogopaopao.github.io/newstack/p/rccstm32%E6%97%B6%E9%92%9F%E6%A0%91/</guid>
+        <description>&lt;p&gt;问题来源于我对时钟树，SysCLK和SysTick的混淆理解。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://gogopaopao.github.io/newstack/newstack/p/rccstm32%E6%97%B6%E9%92%9F%E6%A0%91/img/%E4%B8%89%E8%80%85%E5%85%B3%E7%B3%BB%E5%9B%BE.png&#34;
+	width=&#34;190&#34;
+	height=&#34;164&#34;
+	srcset=&#34;https://gogopaopao.github.io/newstack/newstack/p/rccstm32%E6%97%B6%E9%92%9F%E6%A0%91/img/%E4%B8%89%E8%80%85%E5%85%B3%E7%B3%BB%E5%9B%BE_hu5579098253190593432.png 480w, https://gogopaopao.github.io/newstack/newstack/p/rccstm32%E6%97%B6%E9%92%9F%E6%A0%91/img/%E4%B8%89%E8%80%85%E5%85%B3%E7%B3%BB%E5%9B%BE_hu3020660606046934244.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;115&#34;
+		data-flex-basis=&#34;278px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;RCC ： reset clock control 复位和时钟控制器。&lt;/p&gt;
+&lt;p&gt;​	MCU都是基于&lt;strong&gt;时序&lt;/strong&gt;控制的，时序系统对MCU非常重要，因此在MCU设计时就设计了专门用于控制时序的电路，在芯片设计中称为时钟树设计。由此设计出来的时钟，可以精确控制我们的单片机 系统。一个MCU越复杂，时钟系统也会相应地变得复杂，如STM32F1的时钟系统比较复杂，不像简单的51单片机一个系统时钟就可以解决一切。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;为什么叫时钟树而不是时钟？&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;​	对于STM32F1系列的芯片，正常工作的主频可以达到72Mhz，但并不是所有外设都需要系统时钟这么高的频率，比如看门狗以及RTC只需要几十kHZ的时钟即可。同一个电路，&lt;strong&gt;时钟越快功耗越大&lt;/strong&gt;，同时&lt;strong&gt;抗电磁干扰能力也会越弱&lt;/strong&gt;，所以对于较为复杂的MCU一般都是采取&lt;strong&gt;多时钟源&lt;/strong&gt;的方法来解决这些问题。所以我们称为&lt;strong&gt;时钟树&lt;/strong&gt;而不是时钟。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;时钟树 = 时钟源 + &lt;strong&gt;处理&lt;/strong&gt;（PLL/分频）+ &lt;strong&gt;分发&lt;/strong&gt;（总线/外设）&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;1-输入时钟源&#34;&gt;1. 输入时钟源
+&lt;/h3&gt;&lt;p&gt;​	对于STM32F1系列单片机，输入时钟源（InputClock）主要包括四种，即&lt;strong&gt;HSI&lt;/strong&gt;，&lt;strong&gt;HSE&lt;/strong&gt;，&lt;strong&gt;LSI&lt;/strong&gt;，&lt;strong&gt;LSE&lt;/strong&gt;。其中，从时钟频率来分可以分为高速时钟源和低速时钟源，其中HIS和HSE为高速时钟，LSI和LSE是低速时钟。从来源可分为外部时钟源和内部时钟源，外部时钟源就是从外部通过接晶振的方式获取时钟源，其中HSE和LSE是外部时钟源；其他是内部时钟源，芯片上电即可产生，不需要借助外部电路。&lt;/p&gt;
+</description>
         </item>
         <item>
         <title>STM32启动配置速查——BOOT引脚</title>
